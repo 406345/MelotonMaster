@@ -70,6 +70,12 @@
     <ClCompile Include="..\source\MelotonSession.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\NodeSession.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\NodeSessionPool.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\message\MessageAlive.pb.h">
@@ -119,9 +125,6 @@
     </ClInclude>
     <ClInclude Include="..\message\MessageWrite.pb.h">
       <Filter>message</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\MelotonMaster.h">
-      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\handler\MessageAliveHandler.h">
       <Filter>handler</Filter>
@@ -181,6 +184,13 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\MelotonSession.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MelotonMaster.h" />
+    <ClInclude Include="..\include\ObjectPool.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\NodeSessionPool.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

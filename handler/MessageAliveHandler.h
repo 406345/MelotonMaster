@@ -23,8 +23,19 @@ limitations under the License.
 #include <string>
 #include <MRT.h>
 #include <MessageAlive.pb.h>
+#include <NodeSession.h>
 
 static int MessageAliveHandler( MRT::Session * session , uptr<MessageAlive> message )
 {
+    NodeSession* node = scast<NodeSession*>( session );
+
+    if ( node == nullptr )
+        return -1;
+
+    node->AliveTime  ( Timer::Tick() );
+    node->CPU        ( message->cpu() );
+    node->Memory     ( message->memory() );
+    node->BlockCount ( message->blockcount() );
+
     return 0;
 }

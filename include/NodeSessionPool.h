@@ -1,5 +1,4 @@
 /***********************************************************************************
-
 This file is part of Project for MaratonFramework
 For the latest info, see  https://github.com/Yhgenomics/MaratonFramework.git
 
@@ -19,58 +18,32 @@ limitations under the License.
 ***********************************************************************************/
 
 /***********************************************************************************
-* Description   : 
+* Description   :
 * Creator       : Shubo Yang
 * Date          :
 * Modifed       : When      | Who       | What
 ***********************************************************************************/
 
-/* * * * * * * * * * * * * * * *
-* YHGenomics Inc.
-* Author     : yang shubo
-* Date       : 2015-11-11
-* Description:
-* * * * * * * * * * * * * * * */
+#ifndef NODE_SESSION_POOL_H_
+#define NODE_SESSION_POOL_H_
 
-#ifndef MELOTON_MASTER_H_
-#define MELOTON_MASTER_H_ 
+#include <MelotonMaster.h>
+#include <NodeSession.h>
+#include <ObjectPool.h>
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  Const Section
- * * * * * * * * * * * * * * * * * * * * * * * * * * */
-static size_t NODE_TIMEOUT = 5000;
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  Macro Function Section
- * * * * * * * * * * * * * * * * * * * * * * * * * * */
-#define SINGLETON_DEF( __type__ ) static __type__ * Instance() \
-{ \
-    static __type__ inst_; \
-    return &inst_; \
-}
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  Enum Section
- * * * * * * * * * * * * * * * * * * * * * * * * * * */
-enum MelotonSessionParseState
+class NodeSessionPool
+    : public ObjectPool<NodeSession*>
 {
-    kHead = 1,
-    kLength,
-    kBody
+public:
+
+    SINGLETON_DEF( NodeSessionPool );
+
+    NodeSession* FindById( size_t id );
+
+private:
+
+    NodeSessionPool  (){};
+    ~NodeSessionPool (){};
 };
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  Debug Section
- * * * * * * * * * * * * * * * * * * * * * * * * * * */
-#ifdef _DEBUG
-
-#define DEBUG_LOG(FMT,... ) Logger::Log( FMT,__VA_ARGS__)
-
-#endif // DEBUG
-
-#endif // !MELOTON_MASTER_H_
-
-
-
-
-
+#endif // !NODE_SESSION_POOL_H_

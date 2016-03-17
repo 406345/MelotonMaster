@@ -40,6 +40,8 @@ class MelotonSession :
 {
 public:
 
+    MelotonSession      ();
+    ~MelotonSession     ();
     void    SendMessage ( uptr<google::protobuf::Message> message );
     size_t  Id          ()
     {
@@ -47,6 +49,8 @@ public:
     };
 
 protected:
+
+    static size_t SessionId;
 
     // Callback when session is connnecting to remote server
     void OnConnect  ()                    override;

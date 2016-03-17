@@ -1,6 +1,18 @@
 #include <MelotonSession.h>
 #include <MessageHub.h>
 
+
+MelotonSession::MelotonSession()
+{
+    static size_t SessionId = 10000;
+    this->id_ = SessionId;
+    SessionId = (++SessionId % 0xFFFFFFFFFFul);
+}
+
+MelotonSession::~MelotonSession()
+{
+}
+
 void MelotonSession::SendMessage( uptr<google::protobuf::Message> message )
 { 
     uptr<MRT::Buffer> head   = make_uptr( MRT::Buffer , "YH" );

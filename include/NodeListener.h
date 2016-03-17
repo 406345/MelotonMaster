@@ -28,6 +28,7 @@ limitations under the License.
 #define NODE_LISTENER_H_
 
 #include <MRT.h>
+#include <ObjectPool.h>
 
 using MRT::Session;
 
@@ -36,16 +37,8 @@ class NodeListener
 {
 public:
 
-    NodeListener( )
-        : MRT::Listener( "0.0.0.0" , 100 )
-    {
-
-    }
-
-    ~NodeListener( )
-    {
-
-    }
+    NodeListener ( ) ; 
+    ~NodeListener( );
 
 protected:
 

@@ -28,13 +28,41 @@ limitations under the License.
 #define NODE_SESSION_H_
 
 #include <MRT.h>
+#include <MelotonSession.h>
 
 class NodeSession
-    : public MRT::Session
+    : public MelotonSession
 {
 public:
 
+    NodeSession  ()
+    {
+        this->UpdateAliveTime();
+    };
 
+    ~NodeSession ()
+    {
+
+    };
+
+    void UpdateAliveTime();
+
+    size_t AliveTime    () { return ( Timer::Tick() - this->alive_time_ ); }
+    size_t CPU          () { return this->cpu_; }
+    size_t Memory       () { return this->memory_; }
+    size_t BlockCount   () { return this->block_count_; }
+
+    void   AliveTime    ( size_t value ) { this->alive_time_  = value; }
+    void   CPU          ( size_t value ) { this->cpu_         = value; }
+    void   Memory       ( size_t value ) { this->memory_      = value; }
+    void   BlockCount   ( size_t value ) { this->block_count_ = value; }
+
+private:
+
+    size_t alive_time_  = 0;
+    size_t cpu_         = 0;
+    size_t memory_      = 0;
+    size_t block_count_ = 0;
 };
 
 #endif // !NODE_SESSION_H_ 
