@@ -1,6 +1,6 @@
 /***********************************************************************************
 This file is part of Project for MaratonFramework
-For the latest info, see  https://github.com/Yhgenomics/MaratonFramework.git
+For the latest info, see  https://github.com/Yhgenomics/MelotonMaster.git
 
 Copyright 2016 Yhgenomics
 

@@ -24,33 +24,38 @@ limitations under the License.
 * Modifed       : When      | Who       | What
 ***********************************************************************************/
 
-#ifndef NODE_LISTENER_H_
-#define NODE_LISTENER_H_
+#ifndef PATH_H_
+#define PATH_H_
 
-#include <MRT.h>
-#include <ObjectPool.h>
+#include <string>
+#include <vector>
 
-using MRT::Session;
+using std::string;
+using std::vector;
 
-class NodeListener
-    : public MRT::Listener
+class Path
 {
 public:
 
-    NodeListener ( ) ; 
-    ~NodeListener( );
+    Path( string path );
+    Path( string path , string filename );
 
-protected:
+    string          FileNameWithoutExtention () { return this->filename_without_extention_; };
+    string          FileName                 () { return this->filename_; };
+    string          FileExtention            () { return this->filename_extention_; };
+    vector<string>  PathList                 () { return vector<string>( this->path_list_ ); };
 
-    // Create a session 
-    Session * CreateSession    ( ) override;
+private:
 
-    // Callback when a session is created
-    void      OnSessionOpen   ( Session * session ) override;
+    string          original_path_              = "";
+    string          original_filename_          = "";
+    string          filename_                   = "";
+    string          filename_without_extention_ = "";
+    string          filename_extention_         = "";
+    vector<string>  path_list_;
 
-    // Callback after a session is closed
-    void      OnSessionClose  ( Session * session ) override; 
-
+    void ParsePath();
+    void ParseFilename();
 };
 
-#endif // !NODE_LISTENER_H_ 
+#endif // !PATH_H_ 

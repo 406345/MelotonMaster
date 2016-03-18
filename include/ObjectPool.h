@@ -1,6 +1,6 @@
 /***********************************************************************************
 This file is part of Project for MaratonFramework
-For the latest info, see  https://github.com/Yhgenomics/MaratonFramework.git
+For the latest info, see  https://github.com/Yhgenomics/MelotonMaster.git
 
 Copyright 2016 Yhgenomics
 
@@ -99,8 +99,7 @@ public:
             Sort( i + 1 , end , callback );
     }
 
-    // Sort the pool if left > right return true
-    // if left <= right return false;
+    // Sort the pool if left > right return true if left <= right return false;
     // @callback : use lamda expression to compare two objects
     //             bool( TYPE * left , TYPE * right ) 
     void Sort( CompareType callback )
@@ -127,6 +126,8 @@ public:
                 return object;
             }
         }
+
+        return nullptr;
     }
 
     // Find a object in pool 

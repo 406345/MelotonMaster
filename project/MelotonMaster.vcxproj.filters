@@ -76,6 +76,9 @@
     <ClCompile Include="..\source\NodeSessionPool.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\Path.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\message\MessageAlive.pb.h">
@@ -191,6 +194,12 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\NodeSessionPool.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\FileDictionary.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Path.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

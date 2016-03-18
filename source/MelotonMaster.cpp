@@ -3,10 +3,20 @@
 #include <MessageHub.h>
 #include <ObjectPool.h>
 #include <MelotonMaster.h>
+#include <Path.h>
 
 int main( int argc , char* argv[] )
 {
-    Logger::Sys("Meloton system start");
+
+    Path p2( "/abc.fastq" );
+    Path p4( "/abc.fastq." );
+    Path p3( "/abc" );
+    Path p( "/abc/eee/" , "123" );
+    Path p1( "abc/bccc/" , "123");
+     
+    auto l = Timer::Date();
+
+    Logger::Sys("Meloton master start");
 
     MRT::Maraton::Instance()->Regist( make_sptr( NodeListener ) );
 

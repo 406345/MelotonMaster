@@ -169,6 +169,7 @@
     <ClCompile Include="..\source\MelotonSession.cpp" />
     <ClCompile Include="..\source\NodeSession.cpp" />
     <ClCompile Include="..\source\NodeSessionPool.cpp" />
+    <ClCompile Include="..\source\Path.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\handler\MessageAliveHandler.h" />
@@ -188,12 +189,14 @@
     <ClInclude Include="..\handler\MessageReadHandler.h" />
     <ClInclude Include="..\handler\MessageSyncBlockHandler.h" />
     <ClInclude Include="..\handler\MessageWriteHandler.h" />
+    <ClInclude Include="..\include\FileDictionary.h" />
     <ClInclude Include="..\include\MelotonMaster.h" />
     <ClInclude Include="..\include\MelotonSession.h" />
     <ClInclude Include="..\include\NodeListener.h" />
     <ClInclude Include="..\include\NodeSession.h" />
     <ClInclude Include="..\include\NodeSessionPool.h" />
     <ClInclude Include="..\include\ObjectPool.h" />
+    <ClInclude Include="..\include\Path.h" />
     <ClInclude Include="..\message\MessageAlive.pb.h" />
     <ClInclude Include="..\message\MessageBlockAccept.pb.h" />
     <ClInclude Include="..\message\MessageBlockData.pb.h" />

@@ -24,33 +24,22 @@ limitations under the License.
 * Modifed       : When      | Who       | What
 ***********************************************************************************/
 
-#ifndef NODE_LISTENER_H_
-#define NODE_LISTENER_H_
+#ifndef FILE_DIECTIONARY_H_
+#define FILE_DIECTIONARY_H_
 
-#include <MRT.h>
-#include <ObjectPool.h>
+#include <MelotonMaster.h>
 
-using MRT::Session;
-
-class NodeListener
-    : public MRT::Listener
+class FileDictionary
 {
 public:
 
-    NodeListener ( ) ; 
-    ~NodeListener( );
+    SINGLETON_DEF( FileDictionary );
 
-protected:
+private:
 
-    // Create a session 
-    Session * CreateSession    ( ) override;
-
-    // Callback when a session is created
-    void      OnSessionOpen   ( Session * session ) override;
-
-    // Callback after a session is closed
-    void      OnSessionClose  ( Session * session ) override; 
+    FileDictionary () = default;
+    ~FileDictionary() = default;
 
 };
 
-#endif // !NODE_LISTENER_H_ 
+#endif // !FILE_DIECTIONARY_H_
