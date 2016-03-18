@@ -56,7 +56,7 @@ void Path::ParsePath()
         this->path_list_.push_back( "/" );
     }
 
-    for ( size_t pos = 1; pos < this->original_path_.size(); pos++ )
+    for ( int pos = 1; pos < this->original_path_.size(); pos++ )
     {
         if ( this->original_path_[pos] == '/' )
         {
@@ -94,7 +94,7 @@ void Path::ParsePath()
 
 void Path::ParseFilename()
 {
-    for ( int i = this->filename_.size() - 1; i > 0 ; i-- )
+    for ( size_t i = this->filename_.size() - 1; i > 0 ; i-- )
     {
         if ( this->filename_[i] == '.' )
         {
@@ -110,5 +110,4 @@ void Path::ParseFilename()
     {
         this->filename_without_extention_ = this->filename_;
     }
-
 }
