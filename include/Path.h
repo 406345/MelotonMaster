@@ -40,10 +40,37 @@ public:
     Path( string path );
     Path( string path , string filename );
 
+    Path( Path & path );
+    Path( Path && path );
+    Path operator=( Path & p );
+    Path operator=( Path && p );
+
     string          FileNameWithoutExtention () { return this->filename_without_extention_; };
     string          FileName                 () { return this->filename_; };
     string          FileExtention            () { return this->filename_extention_; };
     vector<string>  PathList                 () { return vector<string>( this->path_list_ ); };
+    string          ToPath                   () 
+    { 
+        string ret = "";
+
+        for ( auto s : this->path_list_ )
+        {
+            ret = ret + s + "/";
+        }
+
+        return ret;
+    };
+    string          ToFullPath               () 
+    { 
+        string ret = "";
+
+        for ( auto s : this->path_list_ )
+        {
+            ret = ret + s + "/";
+        }
+
+        return (ret + this->filename_);
+    };
 
 private:
 

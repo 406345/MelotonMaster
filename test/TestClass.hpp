@@ -1,11 +1,15 @@
 /***********************************************************************************
-This file is part of Project for MaratonServant
-For the latest info, see  https://github.com/Yhgenomics/MaratonServant.git
+This file is part of Project for Meloton
+For the latest info, see  https://github.com/Yhgenomics/MelotonMaster.git
+
 Copyright 2016 Yhgenomics
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
+
 http://www.apache.org/licenses/LICENSE-2.0
+
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,19 +18,39 @@ limitations under the License.
 ***********************************************************************************/
 
 /***********************************************************************************
-* Description   : MessageOpenFile handler.
-* Creator       : Shubo Yang(shuboyang@yhgenomics.com)
-* Date          : 2016-03-17
+* Description   :
+* Creator       : Shubo Yang
+* Date          :
 * Modifed       : When      | Who       | What
 ***********************************************************************************/
 
-#include <string>
+#ifndef TEST_CLASS_H_
+#define TEST_CLASS_H_
+
 #include <MRT.h>
-#include <MessageOpenFile.pb.h>
+#include <string>
 
-static int MessageOpenFileHandler( MRT::Session * session , uptr<MessageOpenFile> message )
+using std::string;
+
+class TestClass
 {
-    //Path path( message->path() );
+public:
 
-    return 0;
-}
+    virtual void StartTest() = 0;
+
+protected:
+
+    void Asset( string msg , bool result )
+    {
+        if ( result )
+        {
+            Logger::Sys( "% success" , msg );
+        }
+        else
+        {
+            Logger::Sys( "% failed" , msg );
+        }
+    }
+};
+
+#endif // !TEST_CLASS_H_ 

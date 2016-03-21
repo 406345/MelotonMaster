@@ -74,9 +74,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\include;..\handler;..\message;..\3rd;$(IncludePath)</IncludePath>
-    <ReferencePath>..\3rd;$(ReferencePath)</ReferencePath>
-    <SourcePath>..\source;$(SourcePath)</SourcePath>
+    <IncludePath>..\include;..\handler;..\message;..\3rd;..\test;$(IncludePath)</IncludePath>
+    <SourcePath>..\source;..\test;$(SourcePath)</SourcePath>
     <LibraryPath>..\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -165,6 +164,9 @@
     <ClCompile Include="..\message\MessageReadBlock.pb.cc" />
     <ClCompile Include="..\message\MessageSyncBlock.pb.cc" />
     <ClCompile Include="..\message\MessageWrite.pb.cc" />
+    <ClCompile Include="..\source\ClientTokenPool.cpp" />
+    <ClCompile Include="..\source\DirectorMeta.cpp" />
+    <ClCompile Include="..\source\FileDispatcher.cpp" />
     <ClCompile Include="..\source\MelotonMaster.cpp" />
     <ClCompile Include="..\source\MelotonSession.cpp" />
     <ClCompile Include="..\source\NodeSession.cpp" />
@@ -189,7 +191,11 @@
     <ClInclude Include="..\handler\MessageReadHandler.h" />
     <ClInclude Include="..\handler\MessageSyncBlockHandler.h" />
     <ClInclude Include="..\handler\MessageWriteHandler.h" />
+    <ClInclude Include="..\include\ClientTokenPool.h" />
+    <ClInclude Include="..\include\DirectorMeta.h" />
     <ClInclude Include="..\include\FileDictionary.h" />
+    <ClInclude Include="..\include\FileDispatcher.h" />
+    <ClInclude Include="..\include\FileMeta.h" />
     <ClInclude Include="..\include\MelotonMaster.h" />
     <ClInclude Include="..\include\MelotonSession.h" />
     <ClInclude Include="..\include\NodeListener.h" />
@@ -213,6 +219,8 @@
     <ClInclude Include="..\message\MessageReadBlock.pb.h" />
     <ClInclude Include="..\message\MessageSyncBlock.pb.h" />
     <ClInclude Include="..\message\MessageWrite.pb.h" />
+    <ClInclude Include="..\test\DirectoryMetaTest.hpp" />
+    <ClInclude Include="..\test\TestClass.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

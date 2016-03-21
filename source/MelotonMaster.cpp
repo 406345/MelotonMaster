@@ -5,16 +5,16 @@
 #include <MelotonMaster.h>
 #include <Path.h>
 
-int main( int argc , char* argv[] )
-{
+#include <DirectoryMetaTest.hpp>
 
-    Path p2( "/abc.fastq" );
-    Path p4( "/abc.fastq." );
-    Path p3( "/abc" );
-    Path p( "/abc/eee/" , "123" );
-    Path p1( "abc/bccc/" , "123");
-     
-    auto l = Timer::Date();
+int main( int argc , char* argv[] )
+{ 
+
+    DirectoryMetaTest test;
+    test.StartTest();
+
+
+    scanf( "" );
 
     Logger::Sys("meloton master start");
 

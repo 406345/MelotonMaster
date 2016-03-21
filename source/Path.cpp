@@ -42,21 +42,69 @@ Path::Path( string path , string filename )
     this->ParseFilename ();
 }
 
+Path::Path( Path & path )
+{
+    this->filename_                     = path.filename_;
+    this->filename_extention_           = path.filename_extention_;
+    this->filename_without_extention_   = path.filename_without_extention_;
+    this->original_filename_            = path.original_filename_;
+    this->original_path_                = path.original_path_;
+
+    this->path_list_ = vector<string>( path.path_list_ );
+}
+
+Path::Path( Path && path )
+{
+    this->filename_                     = path.filename_;
+    this->filename_extention_           = path.filename_extention_;
+    this->filename_without_extention_   = path.filename_without_extention_;
+    this->original_filename_            = path.original_filename_;
+    this->original_path_                = path.original_path_;
+
+    this->path_list_ = vector<string>( path.path_list_ );
+}
+
+Path Path::operator=( Path & path )
+{
+    this->filename_                     = path.filename_;
+    this->filename_extention_           = path.filename_extention_;
+    this->filename_without_extention_   = path.filename_without_extention_;
+    this->original_filename_            = path.original_filename_;
+    this->original_path_                = path.original_path_;
+
+    this->path_list_ = vector<string>( path.path_list_ );
+    
+    return *this;
+}
+
+Path Path::operator=( Path && path )
+{
+    this->filename_                     = path.filename_;
+    this->filename_extention_           = path.filename_extention_;
+    this->filename_without_extention_   = path.filename_without_extention_;
+    this->original_filename_            = path.original_filename_;
+    this->original_path_                = path.original_path_;
+
+    this->path_list_ = vector<string>( path.path_list_ );
+    
+    return *this;
+}
+
 void Path::ParsePath()
 {
     int index = 0;
-    int last_spliter_pos = 1;
+    int last_spliter_pos = 0;
 
-    if ( this->original_path_[0] != '/' )
+    /*if ( this->original_path_[0] != '/' )
     {
         this->original_path_ = "/" + this->original_path_;
     }
     else
     {
         this->path_list_.push_back( "/" );
-    }
+    }*/
 
-    for ( int pos = 1; pos < this->original_path_.size(); pos++ )
+    for ( int pos = 0; pos < this->original_path_.size(); pos++ )
     {
         if ( this->original_path_[pos] == '/' )
         {
@@ -79,7 +127,7 @@ void Path::ParsePath()
         }
     }
 
-    if ( last_spliter_pos > this->original_path_.size() )
+    if ( last_spliter_pos >= this->original_path_.size() )
     {
         return;
     }
@@ -94,7 +142,7 @@ void Path::ParsePath()
 
 void Path::ParseFilename()
 {
-    for ( size_t i = this->filename_.size() - 1; i > 0 ; i-- )
+    for ( int i = this->filename_.size() - 1; i > 0; i-- )
     {
         if ( this->filename_[i] == '.' )
         {

@@ -13,6 +13,9 @@
     <Filter Include="handler">
       <UniqueIdentifier>{89937adc-fddd-470c-bfd1-1cecf80b9e62}</UniqueIdentifier>
     </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{3652813c-057d-4c63-bb72-cacf3b6de518}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\MelotonMaster.cpp" />
@@ -77,6 +80,15 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\source\Path.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\ClientTokenPool.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\FileDispatcher.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\DirectorMeta.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -201,6 +213,24 @@
     </ClInclude>
     <ClInclude Include="..\include\Path.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\FileDispatcher.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ClientTokenPool.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\DirectorMeta.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\FileMeta.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\DirectoryMetaTest.hpp">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\TestClass.hpp">
+      <Filter>test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

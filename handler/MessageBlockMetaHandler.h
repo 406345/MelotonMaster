@@ -26,5 +26,6 @@ limitations under the License.
 
 static int MessageBlockMetaHandler( MRT::Session * session , uptr<MessageBlockMeta> message )
 {
+
     return 0;
 }
