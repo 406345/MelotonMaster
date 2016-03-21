@@ -16,7 +16,7 @@ int main( int argc , char* argv[] )
      
     auto l = Timer::Date();
 
-    Logger::Sys("Meloton master start");
+    Logger::Sys("meloton master start");
 
     MRT::Maraton::Instance()->Regist( make_sptr( NodeListener ) );
 
