@@ -1,5 +1,5 @@
 /***********************************************************************************
-This file is part of Project for MaratonFramework
+This file is part of Project for Meloton
 For the latest info, see  https://github.com/Yhgenomics/MelotonMaster.git
 
 Copyright 2016 Yhgenomics
@@ -24,33 +24,25 @@ limitations under the License.
 * Modifed       : When      | Who       | What
 ***********************************************************************************/
 
-#ifndef FILE_DIECTIONARY_H_
-#define FILE_DIECTIONARY_H_
+#ifndef NODE_META_H_
+#define NODE_META_H_
 
-#include <MelotonMaster.h>
-#include <DirectorMeta.h>
-#include <MessageBlockMeta.pb.h>
 #include <NodeSession.h>
-#include <FileMeta.h>
-#include <Path.h>
 
-class FileDictionary
+class NodeMeta
 {
 public:
 
-    SINGLETON_DEF( FileDictionary );
+    NodeMeta ( size_t index , NodeSession * session );
+    ~NodeMeta();
 
-    void           AddBlockMeta ( NodeSession* session , 
-                                  const MessageBlockMeta & message );
-
-    sptr<FileMeta> FindFile     ( sptr<Path> path );
+    size_t        Index()    { return this->index_; };
+    NodeSession * Session()  { return this->node_; }
 
 private:
 
-    FileDictionary ();
-    ~FileDictionary();
-
-    sptr<DirectorMeta> director_ = nullptr;
+    size_t        index_ = 0;
+    NodeSession * node_  = nullptr;
 };
 
-#endif // !FILE_DIECTIONARY_H_
+#endif // !NODE_META_H_ 

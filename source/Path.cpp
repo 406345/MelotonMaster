@@ -25,6 +25,7 @@ limitations under the License.
 ***********************************************************************************/
 
 #include <Path.h>
+#include <MRT.h>
 
 Path::Path( string path )
 {
@@ -142,7 +143,7 @@ void Path::ParsePath()
 
 void Path::ParseFilename()
 {
-    for ( int i = this->filename_.size() - 1; i > 0; i-- )
+    for ( int i = scast<int>(this->filename_.size()) - 1; i > 0; i-- )
     {
         if ( this->filename_[i] == '.' )
         {

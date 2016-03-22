@@ -60,6 +60,19 @@ bool FileMeta::RemoveBlock( sptr<BlockMeta> block )
     return false;
 } 
 
+sptr<BlockMeta> FileMeta::FindBlock( size_t block_id )
+{
+    for ( auto & block : this->block_list_ )
+    {
+        if ( block_id == block->BlockId() )
+        {
+            return block;
+        }
+    }
+    
+    return nullptr;
+}
+
 vector<sptr<BlockMeta>> FileMeta::BlockRange( size_t offset , size_t size )
 {
     size_t                  cur_size = 0;

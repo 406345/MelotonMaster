@@ -31,15 +31,47 @@ limitations under the License.
 
 #include <MRT.h>
 #include <ObjectPool.h>
+#include <MelotonMaster.h>
 
 using std::string;
 
-class ClientTokenPool :
-    public ObjectPool<string>
+class ClientToken
 {
 public:
 
+    ClientToken( string token , size_t clientId )
+    {
+        this->token_ = token;
+        this->client_id_ = clientId;
+    }
+
+    string Token()                  { return this->token_; };
+    size_t ClientId()               { return this->client_id_; }
+
+    void Token( string value )      { this->token_ = value; };
+    void ClientId( size_t value )   { this->client_id_ = value; };
+
+private:
+
+    string token_;
+    size_t client_id_;
+
+};
+
+class ClientTokenPool :
+    public ObjectPool<sptr<ClientToken>>
+{
+public:
+
+    MAKE_SINGLETON( ClientTokenPool );
+
     string CreateToken( size_t clientId );
+    bool   RemoveToken( string token );
+    
+private:
+
+    ClientTokenPool () { };
+    ~ClientTokenPool() { };
 
 };
 

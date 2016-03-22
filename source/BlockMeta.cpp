@@ -1,15 +1,5 @@
 #include "BlockMeta.h"
 
-size_t BlockMeta::Index()
-{
-    return this->index_;
-}
-
-void BlockMeta::Index( size_t value )
-{
-    this->index_ = value;
-}
-
 size_t BlockMeta::BlockId()
 {
     return this->block_id_;
@@ -48,4 +38,22 @@ size_t BlockMeta::FileOffset()
 void BlockMeta::FileOffset( size_t value )
 {
     this->file_offset_ = value;
+}
+
+void BlockMeta::AddNode( sptr<NodeMeta> nodemeta )
+{
+    this->node_list_.push_back( nodemeta );
+}
+
+sptr<NodeMeta> BlockMeta::FindNode( size_t sessesion_id )
+{
+    for ( auto & n : this->node_list_ )
+    {
+        if ( n->Session()->Id() == sessesion_id )
+        {
+            return n;
+        }
+    }
+
+    return nullptr;
 }

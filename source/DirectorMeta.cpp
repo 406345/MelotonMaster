@@ -57,7 +57,14 @@ sptr<FileMeta> DirectorMeta::FindFile( sptr<Path> path )
 
 bool DirectorMeta::AddFile( sptr<FileMeta> file )
 {
-    this->file_list_.push_back( move_ptr( file ) );
+    auto dir = this->FindDirector( file->FilePath() );
+ 
+    if ( dir == nullptr )
+    {
+        dir = this->MakeDirector( file->FilePath() );
+    }
+
+    dir->file_list_.push_back( move_ptr( file ) );
     return true;
 }
 

@@ -32,7 +32,7 @@ limitations under the License.
 #include <Path.h>
 #include <FileMeta.h>
 
-class DirectoryMetaTest : 
+class DirectoryMetaTest :
     public TestClass
 {
 public:
@@ -45,43 +45,38 @@ public:
 
     void Test1()
     {
+        auto meta = make_sptr( DirectorMeta );
+        auto pf   = meta->MakeDirector( make_sptr( Path , "/root/d1/d2/d3/d4/" ) );
+        pf->AddFile( make_sptr( FileMeta ) );
 
-        Path pp( "/d1/d2/d3/d4/d5/file.ext" );
-        Logger::Log( "%" , pp.ToFullPath() );
-        Logger::Log( "%" , pp.ToPath() );
-
-        auto meta = make_sptr(DirectorMeta);
-        auto pf   = meta->MakeDirector( make_sptr( Path , "/root/d1/d2/d3/d4/") );
-        pf->AddFile( make_sptr(FileMeta,"file1") );
-
-        auto t1 = meta->FindDirector( make_sptr( Path , "/root/d1/") );
-        this->Asset( "Test 1 Case 1" , t1->Name() == "d1");
+        auto t1 = meta->FindDirector( make_sptr( Path , "/root/d1/" ) );
+        this->Asset( "Test 1 Case 1" , t1->Name() == "d1" );
         t1->MakeDirector( make_sptr( Path , "d11/d22/" ) );
 
-        auto t2 = meta->FindDirector( make_sptr( Path , "/d1/") );
+        auto t2 = meta->FindDirector( make_sptr( Path , "/d1/" ) );
         this->Asset( "Test 1 Case 2" , t2 == nullptr );
 
-        auto t3 = meta->FindDirector( make_sptr( Path , "/d2/") );
+        auto t3 = meta->FindDirector( make_sptr( Path , "/d2/" ) );
         this->Asset( "Test 1 Case 3" , t3 == nullptr );
 
-        auto t4 = meta->FindDirector( make_sptr( Path , "/root/d1/d2/d3/d4/") );
-        this->Asset( "Test 1 Case 4" , t4->Name() == "d4");
+        auto t4 = meta->FindDirector( make_sptr( Path , "/root/d1/d2/d3/d4/" ) );
+        this->Asset( "Test 1 Case 4" , t4->Name() == "d4" );
 
-        auto t5 = meta->FindDirector( make_sptr( Path , "/root/d1/d4/") );
-        this->Asset( "Test 1 Case 5" , t5 == nullptr);
+        auto t5 = meta->FindDirector( make_sptr( Path , "/root/d1/d4/" ) );
+        this->Asset( "Test 1 Case 5" , t5 == nullptr );
 
-        auto t6 = meta->FindDirector( make_sptr( Path , "/root/d1/d11/") );
-        this->Asset( "Test 1 Case 6" , t6->Name() == "d11");
+        auto t6 = meta->FindDirector( make_sptr( Path , "/root/d1/d11/" ) );
+        this->Asset( "Test 1 Case 6" , t6->Name() == "d11" );
 
         auto t7 = meta->FindFile( make_sptr( Path , "/root/d1/d2/d3/d4/file1" ) );
-        this->Asset( "Test 1 Case 7" , t7 != nullptr && t7->Name() == "file1");
+        this->Asset( "Test 1 Case 7" , t7 != nullptr && t7->Name() == "file1" );
 
         auto t8 = meta->FindDirector( make_sptr( Path , "/root/d1/d2/" ) );
-        this->Asset( "Test 1 Case 8" , t8 != nullptr && t8->Name() == "d2");
-        t8->AddFile( make_sptr( FileMeta , "file2" ) );
+        this->Asset( "Test 1 Case 8" , t8 != nullptr && t8->Name() == "d2" );
+        t8->AddFile( make_sptr( FileMeta ) );
 
         auto t9 = meta->FindFile( make_sptr( Path , "/root/d1/d2/file2" ) );
-        this->Asset( "Test 1 Case 9" , t9 != nullptr && t9->Name() == "file2");
+        this->Asset( "Test 1 Case 9" , t9 != nullptr && t9->Name() == "file2" );
 
     }
 

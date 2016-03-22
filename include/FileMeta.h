@@ -55,7 +55,8 @@ public:
     bool Close( string token );
     bool AddBlock( sptr<BlockMeta> block );
     bool RemoveBlock( sptr<BlockMeta> block );
-    
+
+    sptr<BlockMeta>         FindBlock ( size_t block_id );
     vector<sptr<BlockMeta>> BlockRange( size_t offset , size_t size );
     vector<sptr<BlockMeta>> BlockList();
 

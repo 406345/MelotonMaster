@@ -27,33 +27,38 @@ limitations under the License.
 #ifndef BLOCK_META_H_
 #define BLOCK_META_H_
 
+#include <vector>
+#include <NodeMeta.h>
+
+using std::vector;
+
 class BlockMeta
 {
-public:
+public: 
 
-    size_t Index        ();
-    void   Index        ( size_t value );
+    size_t          BlockId      ();
+    void            BlockId      ( size_t value );
 
-    size_t BlockId      ();
-    void   BlockId      ( size_t value );
+    size_t          Size         ();
+    void            Size         ( size_t value );
 
-    size_t Size         ();
-    void   Size         ( size_t value );
+    size_t          BlockSize    ();
+    void            BlockSize    ( size_t value );
 
-    size_t BlockSize    ();
-    void   BlockSize    ( size_t value );
+    size_t          FileOffset   ();
+    void            FileOffset   ( size_t value );
 
-    size_t FileOffset   ();
-    void   FileOffset   ( size_t value );
+    void            AddNode      ( sptr<NodeMeta> nodemeta );
+    sptr<NodeMeta>  FindNode     ( size_t sessesion_id);
 
 private:
 
-    size_t index_       = 0;
     size_t block_id_    = 0;
     size_t size_        = 0;
     size_t file_offset_ = 0;
     size_t block_size_  = 0;
 
+    vector<sptr<NodeMeta>> node_list_;
 };
 
 #endif // !BLOCK_META_H_ 

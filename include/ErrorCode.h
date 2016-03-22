@@ -1,5 +1,5 @@
 /***********************************************************************************
-This file is part of Project for MaratonFramework
+This file is part of Project for Meloton
 For the latest info, see  https://github.com/Yhgenomics/MelotonMaster.git
 
 Copyright 2016 Yhgenomics
@@ -18,39 +18,17 @@ limitations under the License.
 ***********************************************************************************/
 
 /***********************************************************************************
-* Description   :
+* Description   : 
 * Creator       : Shubo Yang
-* Date          :
+* Date          : 2016-03-22
 * Modifed       : When      | Who       | What
 ***********************************************************************************/
 
-#ifndef FILE_DIECTIONARY_H_
-#define FILE_DIECTIONARY_H_
+#ifndef ERROR_CODE_H_
+#define ERROR_CODE_H_
 
-#include <MelotonMaster.h>
-#include <DirectorMeta.h>
-#include <MessageBlockMeta.pb.h>
-#include <NodeSession.h>
-#include <FileMeta.h>
-#include <Path.h>
+static const int ERR_FILE_NOT_EXIST           = 0x100;
+static const int ERR_FILE_ALREADY_OPENTED     = 0x101;
+static const int ERR_FILE_OPEN_FAILED         = 0x101;
 
-class FileDictionary
-{
-public:
-
-    SINGLETON_DEF( FileDictionary );
-
-    void           AddBlockMeta ( NodeSession* session , 
-                                  const MessageBlockMeta & message );
-
-    sptr<FileMeta> FindFile     ( sptr<Path> path );
-
-private:
-
-    FileDictionary ();
-    ~FileDictionary();
-
-    sptr<DirectorMeta> director_ = nullptr;
-};
-
-#endif // !FILE_DIECTIONARY_H_
+#endif // !ERROR_CODE_H_

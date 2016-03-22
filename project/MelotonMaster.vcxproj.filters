@@ -67,9 +67,6 @@
     <ClCompile Include="..\message\MessageWrite.pb.cc">
       <Filter>message</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\NodeListener.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\MelotonSession.cpp">
       <Filter>source</Filter>
     </ClCompile>
@@ -89,6 +86,21 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\source\DirectorMeta.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\FileMeta.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BlockMeta.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\NodeListener.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\NodeMeta.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\FileDictionary.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -231,6 +243,12 @@
     </ClInclude>
     <ClInclude Include="..\test\TestClass.hpp">
       <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\BlockMeta.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\NodeMeta.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

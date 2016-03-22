@@ -17,16 +17,62 @@ limitations under the License.
 * Description   : MessageOpenFile handler.
 * Creator       : Shubo Yang(shuboyang@yhgenomics.com)
 * Date          : 2016-03-17
-* Modifed       : When      | Who       | What
+* Modifed       : 2016-03-22  | Shubo Yang  | Impl 
 ***********************************************************************************/
 
 #include <string>
 #include <MRT.h>
+#include <MessageError.pb.h>
 #include <MessageOpenFile.pb.h>
+#include <FileDictionary.h>
+#include <ErrorCode.h>
+#include <MessageOpenACK.pb.h>
+#include <ClientTokenPool.h>
+#include <MessageOpenACK.pb.h>
 
 static int MessageOpenFileHandler( MRT::Session * session , uptr<MessageOpenFile> message )
 {
-    //Path path( message->path() );
+    auto path  = make_sptr( Path , message->path() );
+    auto file  = FileDictionary::Instance()->FindFile( path );
+    auto node  = scast<NodeSession*>( session );
+    auto reply = make_uptr( MessageOpenACK );
+
+    if ( file == nullptr )
+    {
+        uptr<MessageOpenACK> error = make_uptr( MessageOpenACK );
+        reply->set_code( ERR_FILE_NOT_EXIST );
+        reply->set_message( "files not exist" );
+        node->SendMessage( move_ptr( error ) );
+        return -1;
+    }
+
+    if ( file->IsOpened() )
+    {
+        uptr<MessageOpenACK> error = make_uptr( MessageOpenACK );
+        reply->set_code( ERR_FILE_ALREADY_OPENTED );
+        reply->set_message( "files already opened" );
+        node->SendMessage( move_ptr( error ) );
+        return -1;
+    }
+
+    auto token = ClientTokenPool::Instance()->CreateToken( node->Id() );
+
+    if ( file->Open( token ) )
+    {
+        reply->set_code( 0 );
+        reply->set_message( "" );
+        reply->set_token( token );
+        reply->set_blockcount( file->BlockList().size() );
+        node->SendMessageW( move_ptr( reply ) );
+    }
+    else
+    {
+        uptr<MessageOpenACK> error = make_uptr( MessageOpenACK );
+        reply->set_code( ERR_FILE_OPEN_FAILED );
+        reply->set_message( "files open failed" );
+        node->SendMessage( move_ptr( error ) );
+        return -1;
+    }
 
     return 0;
 }

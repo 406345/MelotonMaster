@@ -40,17 +40,7 @@ public:
     typedef std::function<bool( TYPE left , TYPE right )> CompareType;
     typedef std::function<bool( TYPE object )> FindType;
     typedef std::function<void( TYPE object )> EachType;
-
-    ObjectPool ()
-    {
-
-    };
-
-    ~ObjectPool()
-    {
-        pool.clear();
-    }
-
+      
     void Push( TYPE instance )
     {
         pool.push_back( instance );
@@ -148,6 +138,16 @@ public:
 protected:
 
     vector<TYPE> pool;
+
+    ObjectPool ()
+    {
+
+    };
+
+    ~ObjectPool()
+    {
+        pool.clear();
+    }
 
 };
 

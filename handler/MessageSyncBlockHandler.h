@@ -23,8 +23,15 @@ limitations under the License.
 #include <string>
 #include <MRT.h>
 #include <MessageSyncBlock.pb.h>
+#include <FileDictionary.h>
 
 static int MessageSyncBlockHandler( MRT::Session * session , uptr<MessageSyncBlock> message )
 {
+    for ( size_t i = 0; i < message->blockcount(); i++ )
+    {
+        FileDictionary::Instance()->AddBlockMeta( 
+            scast<NodeSession*>( session ) , 
+            message->blocks(i) );
+    }
     return 0;
 }

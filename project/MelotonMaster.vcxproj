@@ -147,7 +147,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\include\NodeListener.cpp" />
     <ClCompile Include="..\message\MessageAlive.pb.cc" />
     <ClCompile Include="..\message\MessageBlockAccept.pb.cc" />
     <ClCompile Include="..\message\MessageBlockData.pb.cc" />
@@ -164,11 +163,16 @@
     <ClCompile Include="..\message\MessageReadBlock.pb.cc" />
     <ClCompile Include="..\message\MessageSyncBlock.pb.cc" />
     <ClCompile Include="..\message\MessageWrite.pb.cc" />
+    <ClCompile Include="..\source\BlockMeta.cpp" />
     <ClCompile Include="..\source\ClientTokenPool.cpp" />
     <ClCompile Include="..\source\DirectorMeta.cpp" />
+    <ClCompile Include="..\source\FileDictionary.cpp" />
     <ClCompile Include="..\source\FileDispatcher.cpp" />
+    <ClCompile Include="..\source\FileMeta.cpp" />
     <ClCompile Include="..\source\MelotonMaster.cpp" />
     <ClCompile Include="..\source\MelotonSession.cpp" />
+    <ClCompile Include="..\source\NodeListener.cpp" />
+    <ClCompile Include="..\source\NodeMeta.cpp" />
     <ClCompile Include="..\source\NodeSession.cpp" />
     <ClCompile Include="..\source\NodeSessionPool.cpp" />
     <ClCompile Include="..\source\Path.cpp" />
@@ -191,6 +195,7 @@
     <ClInclude Include="..\handler\MessageReadHandler.h" />
     <ClInclude Include="..\handler\MessageSyncBlockHandler.h" />
     <ClInclude Include="..\handler\MessageWriteHandler.h" />
+    <ClInclude Include="..\include\BlockMeta.h" />
     <ClInclude Include="..\include\ClientTokenPool.h" />
     <ClInclude Include="..\include\DirectorMeta.h" />
     <ClInclude Include="..\include\FileDictionary.h" />
@@ -199,6 +204,7 @@
     <ClInclude Include="..\include\MelotonMaster.h" />
     <ClInclude Include="..\include\MelotonSession.h" />
     <ClInclude Include="..\include\NodeListener.h" />
+    <ClInclude Include="..\include\NodeMeta.h" />
     <ClInclude Include="..\include\NodeSession.h" />
     <ClInclude Include="..\include\NodeSessionPool.h" />
     <ClInclude Include="..\include\ObjectPool.h" />
