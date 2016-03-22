@@ -250,5 +250,8 @@
     <ClInclude Include="..\include\NodeMeta.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ErrorCode.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

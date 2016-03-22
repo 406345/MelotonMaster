@@ -198,6 +198,7 @@
     <ClInclude Include="..\include\BlockMeta.h" />
     <ClInclude Include="..\include\ClientTokenPool.h" />
     <ClInclude Include="..\include\DirectorMeta.h" />
+    <ClInclude Include="..\include\ErrorCode.h" />
     <ClInclude Include="..\include\FileDictionary.h" />
     <ClInclude Include="..\include\FileDispatcher.h" />
     <ClInclude Include="..\include\FileMeta.h" />
