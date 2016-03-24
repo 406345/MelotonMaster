@@ -23,8 +23,54 @@ limitations under the License.
 #include <string>
 #include <MRT.h>
 #include <MessageWrite.pb.h>
+#include <ClientTokenPool.h>
+#include <ClientSession.h>
+#include <FileDispatcher.h>
+#include <FileDictionary.h>
+#include <MessagePrepareWrite.pb.h>
 
 static int MessageWriteHandler( MRT::Session * session , uptr<MessageWrite> message )
 {
+    auto client = scast<ClientSession*>( session );
+    auto offset = message->offset();
+    auto size   = message->size();
+    auto token  = message->token();
+    
+    if ( token.empty() )
+    {
+        return -1;
+    }
+
+    auto t = ClientTokenPool::Instance()->CheckToken( token );
+
+    if ( t == nullptr )
+    {
+        return -1;
+    }
+
+    auto block_num      = FileDispatcher::Instance()->DispatchWrite( t , 
+                                                                     offset ,
+                                                                     size );
+
+    auto file           = FileDictionary::Instance()->FindFile( make_sptr( Path , t->Path() ) );
+    auto blocks         = file->BlockList();
+    auto new_block_num  =  block_num - blocks.size();
+
+    for ( size_t i = 0; i < blocks.size(); i++ )
+    {
+        uptr<MessagePrepareWrite> msg = make_uptr( MessagePrepareWrite );
+        auto block = blocks[i];
+        msg->set_clientid( client->Id() );
+        msg->set_fileoffset( block->FileOffset() );
+        msg->set_index( block->IdleNode()->Index() );
+        msg->set_index( block->PartId() );
+        block->IdleNode()->Session()->SendMessage( move_ptr( msg ) );
+    }
+
+    for ( size_t i = 0; i < new_block_num; i++ )
+    {
+
+    }
+
     return 0;
 }

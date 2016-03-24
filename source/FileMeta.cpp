@@ -32,7 +32,7 @@ bool FileMeta::AddBlock( sptr<BlockMeta> block )
 {
     for ( auto & b : this->block_list_ )
     {
-        if ( b->BlockId() == block->BlockId() )
+        if ( b->PartId() == block->PartId() )
         {
             return false;
         }
@@ -50,7 +50,7 @@ bool FileMeta::RemoveBlock( sptr<BlockMeta> block )
                 i != this->block_list_.end();
                 i++ )
     {
-        if ( ( *i )->BlockId() == block->BlockId() )
+        if ( ( *i )->PartId() == block->PartId() )
         {
             this->block_list_.erase( i );
             return true;
@@ -64,7 +64,7 @@ sptr<BlockMeta> FileMeta::FindBlock( size_t block_id )
 {
     for ( auto & block : this->block_list_ )
     {
-        if ( block_id == block->BlockId() )
+        if ( block_id == block->PartId() )
         {
             return block;
         }

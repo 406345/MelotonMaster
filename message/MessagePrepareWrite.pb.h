@@ -88,17 +88,12 @@ class MessagePrepareWrite : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string ClientId = 1;
+  // required int64 ClientId = 1;
   inline bool has_clientid() const;
   inline void clear_clientid();
   static const int kClientIdFieldNumber = 1;
-  inline const ::std::string& clientid() const;
-  inline void set_clientid(const ::std::string& value);
-  inline void set_clientid(const char* value);
-  inline void set_clientid(const char* value, size_t size);
-  inline ::std::string* mutable_clientid();
-  inline ::std::string* release_clientid();
-  inline void set_allocated_clientid(::std::string* clientid);
+  inline ::google::protobuf::int64 clientid() const;
+  inline void set_clientid(::google::protobuf::int64 value);
 
   // required int64 Index = 2;
   inline bool has_index() const;
@@ -107,19 +102,54 @@ class MessagePrepareWrite : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 index() const;
   inline void set_index(::google::protobuf::int64 value);
 
+  // optional int64 FileOffset = 3;
+  inline bool has_fileoffset() const;
+  inline void clear_fileoffset();
+  static const int kFileOffsetFieldNumber = 3;
+  inline ::google::protobuf::int64 fileoffset() const;
+  inline void set_fileoffset(::google::protobuf::int64 value);
+
+  // optional int64 PartId = 4;
+  inline bool has_partid() const;
+  inline void clear_partid();
+  static const int kPartIdFieldNumber = 4;
+  inline ::google::protobuf::int64 partid() const;
+  inline void set_partid(::google::protobuf::int64 value);
+
+  // optional string Path = 5;
+  inline bool has_path() const;
+  inline void clear_path();
+  static const int kPathFieldNumber = 5;
+  inline const ::std::string& path() const;
+  inline void set_path(const ::std::string& value);
+  inline void set_path(const char* value);
+  inline void set_path(const char* value, size_t size);
+  inline ::std::string* mutable_path();
+  inline ::std::string* release_path();
+  inline void set_allocated_path(::std::string* path);
+
   // @@protoc_insertion_point(class_scope:MessagePrepareWrite)
  private:
   inline void set_has_clientid();
   inline void clear_has_clientid();
   inline void set_has_index();
   inline void clear_has_index();
+  inline void set_has_fileoffset();
+  inline void clear_has_fileoffset();
+  inline void set_has_partid();
+  inline void clear_has_partid();
+  inline void set_has_path();
+  inline void clear_has_path();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::std::string* clientid_;
+  ::google::protobuf::int64 clientid_;
   ::google::protobuf::int64 index_;
+  ::google::protobuf::int64 fileoffset_;
+  ::google::protobuf::int64 partid_;
+  ::std::string* path_;
   friend void  protobuf_AddDesc_MessagePrepareWrite_2eproto();
   friend void protobuf_AssignDesc_MessagePrepareWrite_2eproto();
   friend void protobuf_ShutdownFile_MessagePrepareWrite_2eproto();
@@ -134,7 +164,7 @@ class MessagePrepareWrite : public ::google::protobuf::Message {
 
 // MessagePrepareWrite
 
-// required string ClientId = 1;
+// required int64 ClientId = 1;
 inline bool MessagePrepareWrite::has_clientid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -145,69 +175,17 @@ inline void MessagePrepareWrite::clear_has_clientid() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void MessagePrepareWrite::clear_clientid() {
-  if (clientid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    clientid_->clear();
-  }
+  clientid_ = GOOGLE_LONGLONG(0);
   clear_has_clientid();
 }
-inline const ::std::string& MessagePrepareWrite::clientid() const {
+inline ::google::protobuf::int64 MessagePrepareWrite::clientid() const {
   // @@protoc_insertion_point(field_get:MessagePrepareWrite.ClientId)
-  return *clientid_;
-}
-inline void MessagePrepareWrite::set_clientid(const ::std::string& value) {
-  set_has_clientid();
-  if (clientid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    clientid_ = new ::std::string;
-  }
-  clientid_->assign(value);
-  // @@protoc_insertion_point(field_set:MessagePrepareWrite.ClientId)
-}
-inline void MessagePrepareWrite::set_clientid(const char* value) {
-  set_has_clientid();
-  if (clientid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    clientid_ = new ::std::string;
-  }
-  clientid_->assign(value);
-  // @@protoc_insertion_point(field_set_char:MessagePrepareWrite.ClientId)
-}
-inline void MessagePrepareWrite::set_clientid(const char* value, size_t size) {
-  set_has_clientid();
-  if (clientid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    clientid_ = new ::std::string;
-  }
-  clientid_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:MessagePrepareWrite.ClientId)
-}
-inline ::std::string* MessagePrepareWrite::mutable_clientid() {
-  set_has_clientid();
-  if (clientid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    clientid_ = new ::std::string;
-  }
-  // @@protoc_insertion_point(field_mutable:MessagePrepareWrite.ClientId)
   return clientid_;
 }
-inline ::std::string* MessagePrepareWrite::release_clientid() {
-  clear_has_clientid();
-  if (clientid_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    return NULL;
-  } else {
-    ::std::string* temp = clientid_;
-    clientid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-    return temp;
-  }
-}
-inline void MessagePrepareWrite::set_allocated_clientid(::std::string* clientid) {
-  if (clientid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete clientid_;
-  }
-  if (clientid) {
-    set_has_clientid();
-    clientid_ = clientid;
-  } else {
-    clear_has_clientid();
-    clientid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  }
-  // @@protoc_insertion_point(field_set_allocated:MessagePrepareWrite.ClientId)
+inline void MessagePrepareWrite::set_clientid(::google::protobuf::int64 value) {
+  set_has_clientid();
+  clientid_ = value;
+  // @@protoc_insertion_point(field_set:MessagePrepareWrite.ClientId)
 }
 
 // required int64 Index = 2;
@@ -232,6 +210,130 @@ inline void MessagePrepareWrite::set_index(::google::protobuf::int64 value) {
   set_has_index();
   index_ = value;
   // @@protoc_insertion_point(field_set:MessagePrepareWrite.Index)
+}
+
+// optional int64 FileOffset = 3;
+inline bool MessagePrepareWrite::has_fileoffset() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void MessagePrepareWrite::set_has_fileoffset() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void MessagePrepareWrite::clear_has_fileoffset() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void MessagePrepareWrite::clear_fileoffset() {
+  fileoffset_ = GOOGLE_LONGLONG(0);
+  clear_has_fileoffset();
+}
+inline ::google::protobuf::int64 MessagePrepareWrite::fileoffset() const {
+  // @@protoc_insertion_point(field_get:MessagePrepareWrite.FileOffset)
+  return fileoffset_;
+}
+inline void MessagePrepareWrite::set_fileoffset(::google::protobuf::int64 value) {
+  set_has_fileoffset();
+  fileoffset_ = value;
+  // @@protoc_insertion_point(field_set:MessagePrepareWrite.FileOffset)
+}
+
+// optional int64 PartId = 4;
+inline bool MessagePrepareWrite::has_partid() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void MessagePrepareWrite::set_has_partid() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void MessagePrepareWrite::clear_has_partid() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void MessagePrepareWrite::clear_partid() {
+  partid_ = GOOGLE_LONGLONG(0);
+  clear_has_partid();
+}
+inline ::google::protobuf::int64 MessagePrepareWrite::partid() const {
+  // @@protoc_insertion_point(field_get:MessagePrepareWrite.PartId)
+  return partid_;
+}
+inline void MessagePrepareWrite::set_partid(::google::protobuf::int64 value) {
+  set_has_partid();
+  partid_ = value;
+  // @@protoc_insertion_point(field_set:MessagePrepareWrite.PartId)
+}
+
+// optional string Path = 5;
+inline bool MessagePrepareWrite::has_path() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void MessagePrepareWrite::set_has_path() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void MessagePrepareWrite::clear_has_path() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void MessagePrepareWrite::clear_path() {
+  if (path_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_->clear();
+  }
+  clear_has_path();
+}
+inline const ::std::string& MessagePrepareWrite::path() const {
+  // @@protoc_insertion_point(field_get:MessagePrepareWrite.Path)
+  return *path_;
+}
+inline void MessagePrepareWrite::set_path(const ::std::string& value) {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_ = new ::std::string;
+  }
+  path_->assign(value);
+  // @@protoc_insertion_point(field_set:MessagePrepareWrite.Path)
+}
+inline void MessagePrepareWrite::set_path(const char* value) {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_ = new ::std::string;
+  }
+  path_->assign(value);
+  // @@protoc_insertion_point(field_set_char:MessagePrepareWrite.Path)
+}
+inline void MessagePrepareWrite::set_path(const char* value, size_t size) {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_ = new ::std::string;
+  }
+  path_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:MessagePrepareWrite.Path)
+}
+inline ::std::string* MessagePrepareWrite::mutable_path() {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:MessagePrepareWrite.Path)
+  return path_;
+}
+inline ::std::string* MessagePrepareWrite::release_path() {
+  clear_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = path_;
+    path_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void MessagePrepareWrite::set_allocated_path(::std::string* path) {
+  if (path_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete path_;
+  }
+  if (path) {
+    set_has_path();
+    path_ = path;
+  } else {
+    clear_has_path();
+    path_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:MessagePrepareWrite.Path)
 }
 
 

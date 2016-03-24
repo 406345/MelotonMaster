@@ -27,9 +27,13 @@ limitations under the License.
 #ifndef FILE_DISPACHTER_H_
 #define FILE_DISPACHTER_H_
 
+#include <vector>
 #include <MRT.h>
 #include <MelotonMaster.h>
 #include <DirectorMeta.h>
+#include <ClientTokenPool.h>
+
+using std::vector;
 
 class FileDispatcher
 {
@@ -37,12 +41,15 @@ public:
     
     MAKE_SINGLETON ( FileDispatcher );
 
+    size_t DispatchWrite( sptr<ClientToken> token ,
+                          size_t offset ,
+                          size_t size );
+
 private:
 
     FileDispatcher ();
     ~FileDispatcher();
-
-    sptr<DirectorMeta> dir_root_;
+     
 };
 
 #endif // !FILE_DISPACHTER_H_ 

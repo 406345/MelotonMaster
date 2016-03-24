@@ -39,7 +39,7 @@ class ClientToken
 {
 public:
 
-    ClientToken( string token , size_t clientId )
+    ClientToken( string path , string token , size_t clientId )
     {
         this->token_ = token;
         this->client_id_ = clientId;
@@ -47,15 +47,18 @@ public:
 
     string Token()                  { return this->token_; };
     size_t ClientId()               { return this->client_id_; }
+    string Path()                   { return this->path_; }
 
     void Token( string value )      { this->token_ = value; };
     void ClientId( size_t value )   { this->client_id_ = value; };
+    void Path( string value )       { this->path_ = value; }
+
 
 private:
 
     string token_;
     size_t client_id_;
-
+    string path_;
 };
 
 class ClientTokenPool :
@@ -65,8 +68,9 @@ public:
 
     MAKE_SINGLETON( ClientTokenPool );
 
-    string CreateToken( size_t clientId );
-    bool   RemoveToken( string token );
+    sptr<ClientToken>  CreateToken( size_t clientId );
+    bool               RemoveToken( string token );
+    sptr<ClientToken>  CheckToken ( string token );
     
 private:
 

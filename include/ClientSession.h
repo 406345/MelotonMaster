@@ -18,48 +18,21 @@ limitations under the License.
 ***********************************************************************************/
 
 /***********************************************************************************
-* Description   : 
+* Description   :
 * Creator       : Shubo Yang
-* Date          : 2016-03-21
+* Date          :
 * Modifed       : When      | Who       | What
 ***********************************************************************************/
 
-#ifndef BLOCK_META_H_
-#define BLOCK_META_H_
+#ifndef CLIENT_SESSION_H_
+#define CLIENT_SESSION_H_
 
-#include <vector>
-#include <NodeMeta.h>
+#include <MelotonSession.h>
 
-using std::vector;
-
-class BlockMeta
+class ClientSession :
+    public MelotonSession
 {
-public: 
 
-    size_t          PartId      ();
-    void            PartId      ( size_t value );
-
-    size_t          Size         ();
-    void            Size         ( size_t value );
-
-    size_t          BlockSize    ();
-    void            BlockSize    ( size_t value );
-
-    size_t          FileOffset   ();
-    void            FileOffset   ( size_t value );
-
-    void            AddNode      ( sptr<NodeMeta> nodemeta );
-    sptr<NodeMeta>  FindNode     ( size_t sessesion_id);
-    sptr<NodeMeta>  IdleNode     ();
-
-private:
-
-    size_t part_id_     = 0;
-    size_t size_        = 0;
-    size_t file_offset_ = 0;
-    size_t block_size_  = 0;
-
-    vector<sptr<NodeMeta>> node_list_;
 };
 
-#endif // !BLOCK_META_H_ 
+#endif // !CLIENT_SESSION_H_ 

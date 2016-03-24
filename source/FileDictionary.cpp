@@ -25,7 +25,7 @@ void FileDictionary::AddBlockMeta( NodeSession * session ,
     {
         block = make_sptr( BlockMeta );
         file->AddBlock( block );
-        block->BlockId      ( message.partid() );
+        block->PartId      ( message.partid() );
         block->BlockSize    ( 64 );
         block->FileOffset   ( message.fileoffset() );
         block->Size         ( message.size() );

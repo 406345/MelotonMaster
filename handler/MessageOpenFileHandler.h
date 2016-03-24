@@ -56,14 +56,15 @@ static int MessageOpenFileHandler( MRT::Session * session , uptr<MessageOpenFile
     }
 
     auto token = ClientTokenPool::Instance()->CreateToken( node->Id() );
-
-    if ( file->Open( token ) )
+    
+    if ( file->Open( token->Token() ) )
     {
         reply->set_code( 0 );
         reply->set_message( "" );
-        reply->set_token( token );
+        reply->set_token( token->Token() );
         reply->set_blockcount( file->BlockList().size() );
         node->SendMessageW( move_ptr( reply ) );
+        token->Path( message->path() );
     }
     else
     {

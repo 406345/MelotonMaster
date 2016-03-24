@@ -1,13 +1,13 @@
 #include "BlockMeta.h"
 
-size_t BlockMeta::BlockId()
+size_t BlockMeta::PartId()
 {
-    return this->block_id_;
+    return this->part_id_;
 }
 
-void BlockMeta::BlockId( size_t value )
+void BlockMeta::PartId( size_t value )
 {
-    this->block_id_ = value;
+    this->part_id_ = value;
 }
 
 size_t BlockMeta::Size()
@@ -55,5 +55,10 @@ sptr<NodeMeta> BlockMeta::FindNode( size_t sessesion_id )
         }
     }
 
+    return nullptr;
+}
+
+sptr<NodeMeta> BlockMeta::IdleNode()
+{
     return nullptr;
 }

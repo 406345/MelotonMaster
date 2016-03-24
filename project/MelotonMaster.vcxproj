@@ -196,6 +196,7 @@
     <ClInclude Include="..\handler\MessageSyncBlockHandler.h" />
     <ClInclude Include="..\handler\MessageWriteHandler.h" />
     <ClInclude Include="..\include\BlockMeta.h" />
+    <ClInclude Include="..\include\ClientSession.h" />
     <ClInclude Include="..\include\ClientTokenPool.h" />
     <ClInclude Include="..\include\DirectorMeta.h" />
     <ClInclude Include="..\include\ErrorCode.h" />

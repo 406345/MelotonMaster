@@ -253,5 +253,8 @@
     <ClInclude Include="..\include\ErrorCode.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\ClientSession.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
