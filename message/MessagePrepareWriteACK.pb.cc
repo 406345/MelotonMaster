@@ -32,10 +32,12 @@ void protobuf_AssignDesc_MessagePrepareWriteACK_2eproto() {
       "MessagePrepareWriteACK.proto");
   GOOGLE_CHECK(file != NULL);
   MessagePrepareWriteACK_descriptor_ = file->message_type(0);
-  static const int MessagePrepareWriteACK_offsets_[3] = {
+  static const int MessagePrepareWriteACK_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessagePrepareWriteACK, clientid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessagePrepareWriteACK, token_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessagePrepareWriteACK, block_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessagePrepareWriteACK, address_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessagePrepareWriteACK, port_),
   };
   MessagePrepareWriteACK_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -80,9 +82,10 @@ void protobuf_AddDesc_MessagePrepareWriteACK_2eproto() {
   ::protobuf_AddDesc_MessageBlockMeta_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\034MessagePrepareWriteACK.proto\032\026MessageB"
-    "lockMeta.proto\"[\n\026MessagePrepareWriteACK"
+    "lockMeta.proto\"z\n\026MessagePrepareWriteACK"
     "\022\020\n\010ClientId\030\001 \002(\003\022\r\n\005Token\030\002 \002(\t\022 \n\005Blo"
-    "ck\030\003 \002(\0132\021.MessageBlockMeta", 147);
+    "ck\030\003 \002(\0132\021.MessageBlockMeta\022\017\n\007Address\030\004"
+    " \001(\t\022\014\n\004Port\030\005 \001(\005", 178);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "MessagePrepareWriteACK.proto", &protobuf_RegisterTypes);
   MessagePrepareWriteACK::default_instance_ = new MessagePrepareWriteACK();
@@ -103,6 +106,8 @@ struct StaticDescriptorInitializer_MessagePrepareWriteACK_2eproto {
 const int MessagePrepareWriteACK::kClientIdFieldNumber;
 const int MessagePrepareWriteACK::kTokenFieldNumber;
 const int MessagePrepareWriteACK::kBlockFieldNumber;
+const int MessagePrepareWriteACK::kAddressFieldNumber;
+const int MessagePrepareWriteACK::kPortFieldNumber;
 #endif  // !_MSC_VER
 
 MessagePrepareWriteACK::MessagePrepareWriteACK()
@@ -128,6 +133,8 @@ void MessagePrepareWriteACK::SharedCtor() {
   clientid_ = GOOGLE_LONGLONG(0);
   token_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   block_ = NULL;
+  address_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  port_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -139,6 +146,9 @@ MessagePrepareWriteACK::~MessagePrepareWriteACK() {
 void MessagePrepareWriteACK::SharedDtor() {
   if (token_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete token_;
+  }
+  if (address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete address_;
   }
   if (this != default_instance_) {
     delete block_;
@@ -167,7 +177,7 @@ MessagePrepareWriteACK* MessagePrepareWriteACK::New() const {
 }
 
 void MessagePrepareWriteACK::Clear() {
-  if (_has_bits_[0 / 32] & 7) {
+  if (_has_bits_[0 / 32] & 31) {
     clientid_ = GOOGLE_LONGLONG(0);
     if (has_token()) {
       if (token_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -177,6 +187,12 @@ void MessagePrepareWriteACK::Clear() {
     if (has_block()) {
       if (block_ != NULL) block_->::MessageBlockMeta::Clear();
     }
+    if (has_address()) {
+      if (address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        address_->clear();
+      }
+    }
+    port_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -232,6 +248,38 @@ bool MessagePrepareWriteACK::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(34)) goto parse_Address;
+        break;
+      }
+
+      // optional string Address = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_Address:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_address()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->address().data(), this->address().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "address");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(40)) goto parse_Port;
+        break;
+      }
+
+      // optional int32 Port = 5;
+      case 5: {
+        if (tag == 40) {
+         parse_Port:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &port_)));
+          set_has_port();
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -282,6 +330,21 @@ void MessagePrepareWriteACK::SerializeWithCachedSizes(
       3, this->block(), output);
   }
 
+  // optional string Address = 4;
+  if (has_address()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->address().data(), this->address().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "address");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->address(), output);
+  }
+
+  // optional int32 Port = 5;
+  if (has_port()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->port(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -315,6 +378,22 @@ void MessagePrepareWriteACK::SerializeWithCachedSizes(
         3, this->block(), target);
   }
 
+  // optional string Address = 4;
+  if (has_address()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->address().data(), this->address().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "address");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->address(), target);
+  }
+
+  // optional int32 Port = 5;
+  if (has_port()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->port(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -346,6 +425,20 @@ int MessagePrepareWriteACK::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->block());
+    }
+
+    // optional string Address = 4;
+    if (has_address()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->address());
+    }
+
+    // optional int32 Port = 5;
+    if (has_port()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->port());
     }
 
   }
@@ -384,6 +477,12 @@ void MessagePrepareWriteACK::MergeFrom(const MessagePrepareWriteACK& from) {
     if (from.has_block()) {
       mutable_block()->::MessageBlockMeta::MergeFrom(from.block());
     }
+    if (from.has_address()) {
+      set_address(from.address());
+    }
+    if (from.has_port()) {
+      set_port(from.port());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -414,6 +513,8 @@ void MessagePrepareWriteACK::Swap(MessagePrepareWriteACK* other) {
     std::swap(clientid_, other->clientid_);
     std::swap(token_, other->token_);
     std::swap(block_, other->block_);
+    std::swap(address_, other->address_);
+    std::swap(port_, other->port_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

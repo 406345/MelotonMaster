@@ -60,6 +60,13 @@ enum MelotonSessionParseState
     kBody
 };
 
+enum ClientState
+{
+    kIdle = 1 ,
+    kWaitingForBlock = 2,
+    kTransfer
+};
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Debug Section
  * * * * * * * * * * * * * * * * * * * * * * * * * * */

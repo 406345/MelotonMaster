@@ -35,6 +35,9 @@ static int MessageWriteHandler( MRT::Session * session , uptr<MessageWrite> mess
     auto offset = message->offset();
     auto size   = message->size();
     auto token  = message->token();
+
+    if ( client->State() != ClientState::kIdle )
+        return 0;
     
     if ( token.empty() )
     {
@@ -48,13 +51,19 @@ static int MessageWriteHandler( MRT::Session * session , uptr<MessageWrite> mess
         return -1;
     }
 
+
     auto block_num      = FileDispatcher::Instance()->DispatchWrite( t , 
                                                                      offset ,
                                                                      size );
 
+    client->SetState    ( ClientState::kWaitingForBlock );
+    client->SetBlockNum ( block_num );
+
     auto file           = FileDictionary::Instance()->FindFile( make_sptr( Path , t->Path() ) );
     auto blocks         = file->BlockList();
-    auto new_block_num  =  block_num - blocks.size();
+    auto new_block_num  = block_num - blocks.size();
+    auto new_part       = blocks.size();
+
 
     for ( size_t i = 0; i < blocks.size(); i++ )
     {
@@ -63,14 +72,20 @@ static int MessageWriteHandler( MRT::Session * session , uptr<MessageWrite> mess
         msg->set_clientid( client->Id() );
         msg->set_fileoffset( block->FileOffset() );
         msg->set_index( block->IdleNode()->Index() );
-        msg->set_index( block->PartId() );
+        msg->set_partid( block->PartId() );
         block->IdleNode()->Session()->SendMessage( move_ptr( msg ) );
+        offset+= block->Size();
     }
 
     for ( size_t i = 0; i < new_block_num; i++ )
     {
-
+        uptr<MessagePrepareWrite> msg = make_uptr( MessagePrepareWrite );
+        msg->set_clientid( client->Id() );
+        msg->set_fileoffset( offset );
+        msg->set_index( 0 );
+        msg->set_partid( new_part + i );
     }
+
 
     return 0;
 }

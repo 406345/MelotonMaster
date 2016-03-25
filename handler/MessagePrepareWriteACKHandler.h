@@ -23,8 +23,27 @@ limitations under the License.
 #include <string>
 #include <MRT.h>
 #include <MessagePrepareWriteACK.pb.h>
+#include <ClientTokenPool.h>
+#include <ClientPool.h>
 
 static int MessagePrepareWriteACKHandler( MRT::Session * session , uptr<MessagePrepareWriteACK> message )
 {
+    auto client = ClientPool::Instance()->FindById( message->clientid() );
+    
+    if ( client == nullptr )
+    {
+        return 0;
+    }
+
+    if ( client->State() != ClientState::kWaitingForBlock )
+    {
+        return 0;
+    }
+
+    message->set_address( session->ip_address() );
+    message->set_port( session->port() );
+
+    client->AddBlock( move_ptr( message ) );
+
     return 0;
 }

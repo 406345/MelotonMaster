@@ -24,32 +24,26 @@ limitations under the License.
 * Modifed       : When      | Who       | What
 ***********************************************************************************/
 
-#ifndef CLIENT_SESSION_H_
-#define CLIENT_SESSION_H_
+#ifndef CLIENT_POOL_H_
+#define CLIENT_POOL_H_
 
-#include <vector>
-#include <MelotonSession.h>
-#include <MessagePrepareWriteACK.pb.h>
+#include <ObjectPool.h>
+#include <ClientSession.h>
+#include <MelotonMaster.h>
 
-using std::vector;
-
-class ClientSession :
-    public MelotonSession
+class ClientPool :
+    public ObjectPool<ClientSession*>
 {
 public:
 
-    void        SetState    ( ClientState state );
-    void        SetBlockNum ( size_t num );
-    void        AddBlock    ( uptr<MessagePrepareWriteACK> ack );
+    MAKE_SINGLETON( ClientPool );
 
-    ClientState State       ()                   { return this->state_; };
+    ClientSession* FindById( size_t id );
 
 private:
 
-    ClientState state_           = ClientState::kIdle;
-    size_t      block_total_num_ = 0;
-
-    vector<uptr<MessagePrepareWriteACK>> block_list_;
+    ClientPool ();
+    ~ClientPool();
 };
 
-#endif // !CLIENT_SESSION_H_ 
+#endif // !CLIENT_POOL_H_ 

@@ -117,6 +117,25 @@ class MessagePrepareWriteACK : public ::google::protobuf::Message {
   inline ::MessageBlockMeta* release_block();
   inline void set_allocated_block(::MessageBlockMeta* block);
 
+  // optional string Address = 4;
+  inline bool has_address() const;
+  inline void clear_address();
+  static const int kAddressFieldNumber = 4;
+  inline const ::std::string& address() const;
+  inline void set_address(const ::std::string& value);
+  inline void set_address(const char* value);
+  inline void set_address(const char* value, size_t size);
+  inline ::std::string* mutable_address();
+  inline ::std::string* release_address();
+  inline void set_allocated_address(::std::string* address);
+
+  // optional int32 Port = 5;
+  inline bool has_port() const;
+  inline void clear_port();
+  static const int kPortFieldNumber = 5;
+  inline ::google::protobuf::int32 port() const;
+  inline void set_port(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:MessagePrepareWriteACK)
  private:
   inline void set_has_clientid();
@@ -125,6 +144,10 @@ class MessagePrepareWriteACK : public ::google::protobuf::Message {
   inline void clear_has_token();
   inline void set_has_block();
   inline void clear_has_block();
+  inline void set_has_address();
+  inline void clear_has_address();
+  inline void set_has_port();
+  inline void clear_has_port();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -133,6 +156,8 @@ class MessagePrepareWriteACK : public ::google::protobuf::Message {
   ::google::protobuf::int64 clientid_;
   ::std::string* token_;
   ::MessageBlockMeta* block_;
+  ::std::string* address_;
+  ::google::protobuf::int32 port_;
   friend void  protobuf_AddDesc_MessagePrepareWriteACK_2eproto();
   friend void protobuf_AssignDesc_MessagePrepareWriteACK_2eproto();
   friend void protobuf_ShutdownFile_MessagePrepareWriteACK_2eproto();
@@ -286,6 +311,106 @@ inline void MessagePrepareWriteACK::set_allocated_block(::MessageBlockMeta* bloc
     clear_has_block();
   }
   // @@protoc_insertion_point(field_set_allocated:MessagePrepareWriteACK.Block)
+}
+
+// optional string Address = 4;
+inline bool MessagePrepareWriteACK::has_address() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void MessagePrepareWriteACK::set_has_address() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void MessagePrepareWriteACK::clear_has_address() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void MessagePrepareWriteACK::clear_address() {
+  if (address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    address_->clear();
+  }
+  clear_has_address();
+}
+inline const ::std::string& MessagePrepareWriteACK::address() const {
+  // @@protoc_insertion_point(field_get:MessagePrepareWriteACK.Address)
+  return *address_;
+}
+inline void MessagePrepareWriteACK::set_address(const ::std::string& value) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    address_ = new ::std::string;
+  }
+  address_->assign(value);
+  // @@protoc_insertion_point(field_set:MessagePrepareWriteACK.Address)
+}
+inline void MessagePrepareWriteACK::set_address(const char* value) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    address_ = new ::std::string;
+  }
+  address_->assign(value);
+  // @@protoc_insertion_point(field_set_char:MessagePrepareWriteACK.Address)
+}
+inline void MessagePrepareWriteACK::set_address(const char* value, size_t size) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    address_ = new ::std::string;
+  }
+  address_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:MessagePrepareWriteACK.Address)
+}
+inline ::std::string* MessagePrepareWriteACK::mutable_address() {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    address_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:MessagePrepareWriteACK.Address)
+  return address_;
+}
+inline ::std::string* MessagePrepareWriteACK::release_address() {
+  clear_has_address();
+  if (address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = address_;
+    address_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void MessagePrepareWriteACK::set_allocated_address(::std::string* address) {
+  if (address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete address_;
+  }
+  if (address) {
+    set_has_address();
+    address_ = address;
+  } else {
+    clear_has_address();
+    address_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:MessagePrepareWriteACK.Address)
+}
+
+// optional int32 Port = 5;
+inline bool MessagePrepareWriteACK::has_port() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void MessagePrepareWriteACK::set_has_port() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void MessagePrepareWriteACK::clear_has_port() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void MessagePrepareWriteACK::clear_port() {
+  port_ = 0;
+  clear_has_port();
+}
+inline ::google::protobuf::int32 MessagePrepareWriteACK::port() const {
+  // @@protoc_insertion_point(field_get:MessagePrepareWriteACK.Port)
+  return port_;
+}
+inline void MessagePrepareWriteACK::set_port(::google::protobuf::int32 value) {
+  set_has_port();
+  port_ = value;
+  // @@protoc_insertion_point(field_set:MessagePrepareWriteACK.Port)
 }
 
 
