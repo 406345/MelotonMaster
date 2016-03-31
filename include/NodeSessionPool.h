@@ -39,7 +39,8 @@ public:
     SINGLETON_DEF( NodeSessionPool );
 
     NodeSession* FindById( size_t id );
-
+    
+    NodeSession* AvailableNode();
 private:
 
     NodeSessionPool  (){};

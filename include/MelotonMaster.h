@@ -39,7 +39,7 @@ limitations under the License.
   Const Section
  * * * * * * * * * * * * * * * * * * * * * * * * * * */
 static size_t NODE_TIMEOUT      = 5000;
-static size_t BLOCK_SIZE        = 1024 * 1024 * 32;
+static size_t BLOCK_SIZE        = 1024 * 1024 * 16;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Macro Function Section

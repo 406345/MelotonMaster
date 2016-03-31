@@ -64,8 +64,11 @@ public:
 
     void Sort( int front , int end , CompareType callback )
     {
+        if ( front < 0 || end < 0 || callback == nullptr)
+            return;
+
         int i = front , j = end;
-        int temp = this->pool[front];//记录第一个数据  
+        auto temp = this->pool[front];//记录第一个数据  
 
         while ( i < j )
         {
@@ -133,6 +136,15 @@ public:
         {
             callback( object );
         }
+    }
+
+    // Get the first element in pool
+    TYPE First()
+    {
+        if ( this->pool.size() > 0 )
+            return this->pool[0];
+        else
+            return nullptr;
     }
 
 protected:

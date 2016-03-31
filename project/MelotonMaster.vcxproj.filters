@@ -109,6 +109,9 @@
     <ClCompile Include="..\source\ClientPool.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\ClientListener.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\message\MessageAlive.pb.h">
@@ -263,6 +266,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\ClientPool.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ClientListener.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

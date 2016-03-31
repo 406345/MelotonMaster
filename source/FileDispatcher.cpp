@@ -29,7 +29,7 @@ size_t FileDispatcher::DispatchWrite( sptr<ClientToken> token ,
     {
         auto range = meta->BlockRange( offset , blocks_size );
         size_t delta = tail - blocks_size;
-        auto num = scast<size_t>( std::ceil( delta / BLOCK_SIZE ) );
+        auto num = scast<size_t>( std::ceil( (double)delta / (double)BLOCK_SIZE ) );
         return range.size() + num;
     }
     else

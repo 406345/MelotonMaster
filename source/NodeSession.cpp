@@ -28,5 +28,10 @@ limitations under the License.
 
 void NodeSession::UpdateAliveTime()
 {
-    this->alive_time_ = Timer::Tick();
+    this->alive_time_ = Timer::Tick() / 1000;
+}
+
+size_t NodeSession::AliveTime()
+{
+    return ( Timer::Tick() / 1000 - this->alive_time_ );
 }

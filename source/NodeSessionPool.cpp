@@ -36,3 +36,12 @@ NodeSession * NodeSessionPool::FindById( size_t id )
         return false;
     } );
 }
+
+NodeSession * NodeSessionPool::AvailableNode()
+{
+    this->Sort( [ ] ( NodeSession* left , NodeSession * right ) { 
+        return left->BlockCount() > right->BlockCount();
+    } );
+
+    return this->First();
+}

@@ -39,6 +39,7 @@ NodeListener::NodeListener()
         1000 ,
         [ ] ( MRT::SyncWorker* worker )
         {
+           
             NodeSessionPool::Instance()->Each( [ ] ( NodeSession* session )
             {
                 if( session->AliveTime() > NODE_TIMEOUT )
@@ -64,9 +65,12 @@ Session * NodeListener::CreateSession()
 void NodeListener::OnSessionOpen( Session * session )
 {
     NodeSessionPool::Instance()->Push( scast<NodeSession*>( session ) );
+    Logger::Log( "<%:%> node connected" , session->ip_address() , session->port() );
 }
 
 void NodeListener::OnSessionClose( Session * session )
 {
     NodeSessionPool::Instance()->Pop( scast<NodeSession*>( session ) );
+     Logger::Log( "<%:%> node disconnected" , session->ip_address() , session->port() );
+    SAFE_DELETE( session );
 }

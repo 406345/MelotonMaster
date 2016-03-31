@@ -30,6 +30,9 @@ limitations under the License.
 #include <vector>
 #include <MelotonSession.h>
 #include <MessagePrepareWriteACK.pb.h>
+#include <FileMeta.h>
+#include <ClientTokenPool.h>
+#include <MessageSyncBlock.pb.h>
 
 using std::vector;
 
@@ -38,16 +41,27 @@ class ClientSession :
 {
 public:
 
-    void        SetState    ( ClientState state );
-    void        SetBlockNum ( size_t num );
-    void        AddBlock    ( uptr<MessagePrepareWriteACK> ack );
+    void        OpenFile     ( sptr<FileMeta> file );
+    void        CloseFile    ();
+    void        SetState     ( ClientState state );
+    void        SetBlockNum  ( size_t num );
+    void        AddBlock     ( uptr<MessagePrepareWriteACK> ack );
 
-    ClientState State       ()                   { return this->state_; };
+    void              OpenToken( sptr<ClientToken> token ) { this->open_token_ = token; }
+    sptr<ClientToken> OpenToken() { return this->open_token_; }
+
+    ClientState State        (){ return this->state_; };
+
+protected:
+
+    void OnClose()  override;
 
 private:
 
-    ClientState state_           = ClientState::kIdle;
-    size_t      block_total_num_ = 0;
+    ClientState         state_           = ClientState::kIdle;
+    size_t              block_total_num_ = 0;
+    sptr<FileMeta>      opened_file_     = nullptr;
+    sptr<ClientToken>   open_token_      = nullptr;
 
     vector<uptr<MessagePrepareWriteACK>> block_list_;
 };

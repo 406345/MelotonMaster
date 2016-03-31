@@ -164,6 +164,7 @@
     <ClCompile Include="..\message\MessageSyncBlock.pb.cc" />
     <ClCompile Include="..\message\MessageWrite.pb.cc" />
     <ClCompile Include="..\source\BlockMeta.cpp" />
+    <ClCompile Include="..\source\ClientListener.cpp" />
     <ClCompile Include="..\source\ClientPool.cpp" />
     <ClCompile Include="..\source\ClientSession.cpp" />
     <ClCompile Include="..\source\ClientTokenPool.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="..\handler\MessageSyncBlockHandler.h" />
     <ClInclude Include="..\handler\MessageWriteHandler.h" />
     <ClInclude Include="..\include\BlockMeta.h" />
+    <ClInclude Include="..\include\ClientListener.h" />
     <ClInclude Include="..\include\ClientPool.h" />
     <ClInclude Include="..\include\ClientSession.h" />
     <ClInclude Include="..\include\ClientTokenPool.h" />

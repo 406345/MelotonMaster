@@ -24,7 +24,6 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/unknown_field_set.h>
-#include "MessageBlockMeta.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Internal implementation detail -- do not call these.
@@ -108,19 +107,31 @@ class MessagePrepareWriteACK : public ::google::protobuf::Message {
   inline ::std::string* release_token();
   inline void set_allocated_token(::std::string* token);
 
-  // required .MessageBlockMeta Block = 3;
-  inline bool has_block() const;
-  inline void clear_block();
-  static const int kBlockFieldNumber = 3;
-  inline const ::MessageBlockMeta& block() const;
-  inline ::MessageBlockMeta* mutable_block();
-  inline ::MessageBlockMeta* release_block();
-  inline void set_allocated_block(::MessageBlockMeta* block);
+  // required int64 FileOffset = 3;
+  inline bool has_fileoffset() const;
+  inline void clear_fileoffset();
+  static const int kFileOffsetFieldNumber = 3;
+  inline ::google::protobuf::int64 fileoffset() const;
+  inline void set_fileoffset(::google::protobuf::int64 value);
 
-  // optional string Address = 4;
+  // required int64 PartId = 4;
+  inline bool has_partid() const;
+  inline void clear_partid();
+  static const int kPartIdFieldNumber = 4;
+  inline ::google::protobuf::int64 partid() const;
+  inline void set_partid(::google::protobuf::int64 value);
+
+  // required int64 Size = 5;
+  inline bool has_size() const;
+  inline void clear_size();
+  static const int kSizeFieldNumber = 5;
+  inline ::google::protobuf::int64 size() const;
+  inline void set_size(::google::protobuf::int64 value);
+
+  // optional string Address = 6;
   inline bool has_address() const;
   inline void clear_address();
-  static const int kAddressFieldNumber = 4;
+  static const int kAddressFieldNumber = 6;
   inline const ::std::string& address() const;
   inline void set_address(const ::std::string& value);
   inline void set_address(const char* value);
@@ -129,10 +140,10 @@ class MessagePrepareWriteACK : public ::google::protobuf::Message {
   inline ::std::string* release_address();
   inline void set_allocated_address(::std::string* address);
 
-  // optional int32 Port = 5;
+  // optional int32 Port = 7;
   inline bool has_port() const;
   inline void clear_port();
-  static const int kPortFieldNumber = 5;
+  static const int kPortFieldNumber = 7;
   inline ::google::protobuf::int32 port() const;
   inline void set_port(::google::protobuf::int32 value);
 
@@ -142,8 +153,12 @@ class MessagePrepareWriteACK : public ::google::protobuf::Message {
   inline void clear_has_clientid();
   inline void set_has_token();
   inline void clear_has_token();
-  inline void set_has_block();
-  inline void clear_has_block();
+  inline void set_has_fileoffset();
+  inline void clear_has_fileoffset();
+  inline void set_has_partid();
+  inline void clear_has_partid();
+  inline void set_has_size();
+  inline void clear_has_size();
   inline void set_has_address();
   inline void clear_has_address();
   inline void set_has_port();
@@ -155,7 +170,9 @@ class MessagePrepareWriteACK : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::int64 clientid_;
   ::std::string* token_;
-  ::MessageBlockMeta* block_;
+  ::google::protobuf::int64 fileoffset_;
+  ::google::protobuf::int64 partid_;
+  ::google::protobuf::int64 size_;
   ::std::string* address_;
   ::google::protobuf::int32 port_;
   friend void  protobuf_AddDesc_MessagePrepareWriteACK_2eproto();
@@ -272,56 +289,87 @@ inline void MessagePrepareWriteACK::set_allocated_token(::std::string* token) {
   // @@protoc_insertion_point(field_set_allocated:MessagePrepareWriteACK.Token)
 }
 
-// required .MessageBlockMeta Block = 3;
-inline bool MessagePrepareWriteACK::has_block() const {
+// required int64 FileOffset = 3;
+inline bool MessagePrepareWriteACK::has_fileoffset() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void MessagePrepareWriteACK::set_has_block() {
+inline void MessagePrepareWriteACK::set_has_fileoffset() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void MessagePrepareWriteACK::clear_has_block() {
+inline void MessagePrepareWriteACK::clear_has_fileoffset() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void MessagePrepareWriteACK::clear_block() {
-  if (block_ != NULL) block_->::MessageBlockMeta::Clear();
-  clear_has_block();
+inline void MessagePrepareWriteACK::clear_fileoffset() {
+  fileoffset_ = GOOGLE_LONGLONG(0);
+  clear_has_fileoffset();
 }
-inline const ::MessageBlockMeta& MessagePrepareWriteACK::block() const {
-  // @@protoc_insertion_point(field_get:MessagePrepareWriteACK.Block)
-  return block_ != NULL ? *block_ : *default_instance_->block_;
+inline ::google::protobuf::int64 MessagePrepareWriteACK::fileoffset() const {
+  // @@protoc_insertion_point(field_get:MessagePrepareWriteACK.FileOffset)
+  return fileoffset_;
 }
-inline ::MessageBlockMeta* MessagePrepareWriteACK::mutable_block() {
-  set_has_block();
-  if (block_ == NULL) block_ = new ::MessageBlockMeta;
-  // @@protoc_insertion_point(field_mutable:MessagePrepareWriteACK.Block)
-  return block_;
-}
-inline ::MessageBlockMeta* MessagePrepareWriteACK::release_block() {
-  clear_has_block();
-  ::MessageBlockMeta* temp = block_;
-  block_ = NULL;
-  return temp;
-}
-inline void MessagePrepareWriteACK::set_allocated_block(::MessageBlockMeta* block) {
-  delete block_;
-  block_ = block;
-  if (block) {
-    set_has_block();
-  } else {
-    clear_has_block();
-  }
-  // @@protoc_insertion_point(field_set_allocated:MessagePrepareWriteACK.Block)
+inline void MessagePrepareWriteACK::set_fileoffset(::google::protobuf::int64 value) {
+  set_has_fileoffset();
+  fileoffset_ = value;
+  // @@protoc_insertion_point(field_set:MessagePrepareWriteACK.FileOffset)
 }
 
-// optional string Address = 4;
-inline bool MessagePrepareWriteACK::has_address() const {
+// required int64 PartId = 4;
+inline bool MessagePrepareWriteACK::has_partid() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void MessagePrepareWriteACK::set_has_address() {
+inline void MessagePrepareWriteACK::set_has_partid() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void MessagePrepareWriteACK::clear_has_address() {
+inline void MessagePrepareWriteACK::clear_has_partid() {
   _has_bits_[0] &= ~0x00000008u;
+}
+inline void MessagePrepareWriteACK::clear_partid() {
+  partid_ = GOOGLE_LONGLONG(0);
+  clear_has_partid();
+}
+inline ::google::protobuf::int64 MessagePrepareWriteACK::partid() const {
+  // @@protoc_insertion_point(field_get:MessagePrepareWriteACK.PartId)
+  return partid_;
+}
+inline void MessagePrepareWriteACK::set_partid(::google::protobuf::int64 value) {
+  set_has_partid();
+  partid_ = value;
+  // @@protoc_insertion_point(field_set:MessagePrepareWriteACK.PartId)
+}
+
+// required int64 Size = 5;
+inline bool MessagePrepareWriteACK::has_size() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void MessagePrepareWriteACK::set_has_size() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void MessagePrepareWriteACK::clear_has_size() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void MessagePrepareWriteACK::clear_size() {
+  size_ = GOOGLE_LONGLONG(0);
+  clear_has_size();
+}
+inline ::google::protobuf::int64 MessagePrepareWriteACK::size() const {
+  // @@protoc_insertion_point(field_get:MessagePrepareWriteACK.Size)
+  return size_;
+}
+inline void MessagePrepareWriteACK::set_size(::google::protobuf::int64 value) {
+  set_has_size();
+  size_ = value;
+  // @@protoc_insertion_point(field_set:MessagePrepareWriteACK.Size)
+}
+
+// optional string Address = 6;
+inline bool MessagePrepareWriteACK::has_address() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void MessagePrepareWriteACK::set_has_address() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void MessagePrepareWriteACK::clear_has_address() {
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void MessagePrepareWriteACK::clear_address() {
   if (address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -389,15 +437,15 @@ inline void MessagePrepareWriteACK::set_allocated_address(::std::string* address
   // @@protoc_insertion_point(field_set_allocated:MessagePrepareWriteACK.Address)
 }
 
-// optional int32 Port = 5;
+// optional int32 Port = 7;
 inline bool MessagePrepareWriteACK::has_port() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 inline void MessagePrepareWriteACK::set_has_port() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000040u;
 }
 inline void MessagePrepareWriteACK::clear_has_port() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void MessagePrepareWriteACK::clear_port() {
   port_ = 0;

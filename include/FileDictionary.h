@@ -44,6 +44,7 @@ public:
                                   const MessageBlockMeta & message );
 
     sptr<FileMeta> FindFile     ( sptr<Path> path );
+    sptr<FileMeta> CreateFile   ( sptr<Path> path );
 
 private:
 

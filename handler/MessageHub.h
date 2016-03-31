@@ -79,31 +79,31 @@ public:
         int msg_len = scast<int>( len - sizeof( size_t ) );
         switch( message_id )
         {
-        case 0x4165676177776D6D : 
+        case 0x4165676177776D6F : 
             {
                 auto msg = new MessageAlive( );
                 msg->ParseFromArray( data, msg_len );
                 return MessageAliveHandler( session , std::move( std::unique_ptr<MessageAlive>( msg ) ) );
             }break;
-        case 0x676767617B737F7D : 
+        case 0x676767617B737F7F : 
             {
                 auto msg = new MessageBlockAccept( );
                 msg->ParseFromArray( data, msg_len );
                 return MessageBlockAcceptHandler( session , std::move( std::unique_ptr<MessageBlockAccept>( msg ) ) );
             }break;
-        case 0x637567657B736F6D : 
+        case 0x637567657B736F6F : 
             {
                 auto msg = new MessageBlockData( );
                 msg->ParseFromArray( data, msg_len );
                 return MessageBlockDataHandler( session , std::move( std::unique_ptr<MessageBlockData>( msg ) ) );
             }break;
-        case 0x76776F6D7B736F6D : 
+        case 0x76776F6D7B736F6F : 
             {
                 auto msg = new MessageBlockList( );
                 msg->ParseFromArray( data, msg_len );
                 return MessageBlockListHandler( session , std::move( std::unique_ptr<MessageBlockList>( msg ) ) );
             }break;
-        case 0x6375676D7B736F6D : 
+        case 0x6375676D7B736F6F : 
             {
                 auto msg = new MessageBlockMeta( );
                 msg->ParseFromArray( data, msg_len );
@@ -115,13 +115,13 @@ public:
                 msg->ParseFromArray( data, msg_len );
                 return MessageErrorHandler( session , std::move( std::unique_ptr<MessageError>( msg ) ) );
             }break;
-        case 0x4F656F63737F657D : 
+        case 0x4F656F63737F657F : 
             {
                 auto msg = new MessageOpenACK( );
                 msg->ParseFromArray( data, msg_len );
                 return MessageOpenACKHandler( session , std::move( std::unique_ptr<MessageOpenACK>( msg ) ) );
             }break;
-        case 0x4F656F69777F657D : 
+        case 0x4F656F69777F657F : 
             {
                 auto msg = new MessageOpenFile( );
                 msg->ParseFromArray( data, msg_len );
@@ -151,19 +151,19 @@ public:
                 msg->ParseFromArray( data, msg_len );
                 return MessagePrepareWriteACKHandler( session , std::move( std::unique_ptr<MessagePrepareWriteACK>( msg ) ) );
             }break;
-        case 0x526567617377656D : 
+        case 0x526567617377656F : 
             {
                 auto msg = new MessageRead( );
                 msg->ParseFromArray( data, msg_len );
                 return MessageReadHandler( session , std::move( std::unique_ptr<MessageRead>( msg ) ) );
             }break;
-        case 0x7B676F6D7377656D : 
+        case 0x7B676F6D7377656F : 
             {
                 auto msg = new MessageReadBlock( );
                 msg->ParseFromArray( data, msg_len );
                 return MessageReadBlockHandler( session , std::move( std::unique_ptr<MessageReadBlock>( msg ) ) );
             }break;
-        case 0x7B676F6D73736F7D : 
+        case 0x7B676F6D73736F7F : 
             {
                 auto msg = new MessageSyncBlock( );
                 msg->ParseFromArray( data, msg_len );
@@ -175,7 +175,11 @@ public:
                 msg->ParseFromArray( data, msg_len );
                 return MessageWriteHandler( session , std::move( std::unique_ptr<MessageWrite>( msg ) ) );
             }break;
-           }
+     default:
+                {
+                    return -1;
+                }break;      }
+        return -1;
     }
 };
 

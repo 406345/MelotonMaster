@@ -45,6 +45,15 @@ sptr<FileMeta> FileDictionary::FindFile( sptr<Path> path )
     return this->director_->FindFile( path );
 }
 
+sptr<FileMeta> FileDictionary::CreateFile( sptr<Path> path )
+{
+    sptr<FileMeta> file = make_sptr( FileMeta );
+    file->FilePath( path );
+
+    this->director_->AddFile( file );
+    return file;
+}
+
 FileDictionary::FileDictionary()
 {
     this->director_ = make_sptr( DirectorMeta );

@@ -29,49 +29,49 @@ limitations under the License.
 #include <MessageOpenACK.pb.h>
 #include <ClientTokenPool.h>
 #include <MessageOpenACK.pb.h>
+#include <ClientSession.h>
 
 static int MessageOpenFileHandler( MRT::Session * session , uptr<MessageOpenFile> message )
 {
     auto path  = make_sptr( Path , message->path() );
     auto file  = FileDictionary::Instance()->FindFile( path );
-    auto node  = scast<NodeSession*>( session );
+    auto client  = scast<ClientSession*>( session );
     auto reply = make_uptr( MessageOpenACK );
 
     if ( file == nullptr )
     {
-        uptr<MessageOpenACK> error = make_uptr( MessageOpenACK );
-        reply->set_code( ERR_FILE_NOT_EXIST );
-        reply->set_message( "files not exist" );
-        node->SendMessage( move_ptr( error ) );
-        return -1;
+        file = FileDictionary::Instance()->CreateFile( path );
     }
 
-    if ( file->IsOpened() )
+    client->OpenFile( file );
+
+    if ( file != nullptr && file->IsOpened() )
     {
-        uptr<MessageOpenACK> error = make_uptr( MessageOpenACK );
+        reply->set_token( "" );
         reply->set_code( ERR_FILE_ALREADY_OPENTED );
-        reply->set_message( "files already opened" );
-        node->SendMessage( move_ptr( error ) );
+        reply->set_message( "file already opened" );
+        client->SendMessage( move_ptr( reply ) );
         return -1;
-    }
+    } 
 
-    auto token = ClientTokenPool::Instance()->CreateToken( node->Id() );
-    
+    auto token = ClientTokenPool::Instance()->CreateToken( client->Id() );
+    token->Path( message->path() );
+    client->OpenToken( token );
+
     if ( file->Open( token->Token() ) )
     {
         reply->set_code( 0 );
         reply->set_message( "" );
         reply->set_token( token->Token() );
-        reply->set_blockcount( file->BlockList().size() );
-        node->SendMessageW( move_ptr( reply ) );
-        token->Path( message->path() );
+        client->SendMessage( move_ptr( reply ) );
     }
     else
     {
         uptr<MessageOpenACK> error = make_uptr( MessageOpenACK );
+        reply->set_token( "" );
         reply->set_code( ERR_FILE_OPEN_FAILED );
-        reply->set_message( "files open failed" );
-        node->SendMessage( move_ptr( error ) );
+        reply->set_message( "open file failed" );
+        client->SendMessage( move_ptr( error ) );
         return -1;
     }
 

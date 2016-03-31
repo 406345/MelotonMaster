@@ -41,7 +41,6 @@ static int MessagePrepareWriteACKHandler( MRT::Session * session , uptr<MessageP
     }
 
     message->set_address( session->ip_address() );
-    message->set_port( session->port() );
 
     client->AddBlock( move_ptr( message ) );
 

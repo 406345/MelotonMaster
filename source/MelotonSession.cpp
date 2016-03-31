@@ -33,6 +33,7 @@ MelotonSession::MelotonSession()
     static size_t SessionId = 10000;
     this->id_ = SessionId;
     SessionId = (++SessionId % 0xFFFFFFFFFFul);
+    this->parse_state_ = MelotonSessionParseState::kHead;
 }
 
 MelotonSession::~MelotonSession()
@@ -51,27 +52,12 @@ void MelotonSession::SendMessage( uptr<google::protobuf::Message> message )
     this->Send( move_ptr( length ) );
     this->Send( move_ptr( body ) );
 }
-
-void MelotonSession::OnConnect( )
-{
-
-}
-
+ 
 void MelotonSession::OnRead( uptr<Buffer> data )
 {
     this->circle_buffer_.Push( move_ptr( data ) );
     this->dispatch_message( this->circle_buffer_ );
-}
-
-void MelotonSession::OnWrite( uptr<Buffer> data )
-{
-
-}
-
-void MelotonSession::OnClose( )
-{
-
-}
+} 
 
 void MelotonSession::dispatch_message( MRT::CircleBuffer & buffer )
 {

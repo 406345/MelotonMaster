@@ -28,6 +28,8 @@ limitations under the License.
 #include <FileDispatcher.h>
 #include <FileDictionary.h>
 #include <MessagePrepareWrite.pb.h>
+#include <NodeSessionPool.h>
+#include <NodeSession.h>
 
 static int MessageWriteHandler( MRT::Session * session , uptr<MessageWrite> message )
 {
@@ -64,7 +66,6 @@ static int MessageWriteHandler( MRT::Session * session , uptr<MessageWrite> mess
     auto new_block_num  = block_num - blocks.size();
     auto new_part       = blocks.size();
 
-
     for ( size_t i = 0; i < blocks.size(); i++ )
     {
         uptr<MessagePrepareWrite> msg = make_uptr( MessagePrepareWrite );
@@ -84,8 +85,15 @@ static int MessageWriteHandler( MRT::Session * session , uptr<MessageWrite> mess
         msg->set_fileoffset( offset );
         msg->set_index( 0 );
         msg->set_partid( new_part + i );
-    }
+        msg->set_path( t->Path() );
+        offset += BLOCK_SIZE;
 
+        NodeSession * node = NodeSessionPool::Instance()->AvailableNode();
+        if ( node != nullptr )
+        {
+            node->SendMessage( move_ptr( msg ) );
+        }
+    }
 
     return 0;
 }

@@ -51,19 +51,10 @@ public:
 protected:
 
     static size_t SessionId;
-
-    // Callback when session is connnecting to remote server
-    void OnConnect  ()                    override;
-
+     
     // Callback when network data is arrived
     // @data : received data 
     void OnRead     ( uptr<Buffer> data ) override;
-
-    // Callback when the data has been send to remote server
-    void OnWrite    ( uptr<Buffer> data ) override;
-
-    // Callback when the session is closed
-    void OnClose    ()                    override;
 
     void dispatch_message( MRT::CircleBuffer & buffer );
 
