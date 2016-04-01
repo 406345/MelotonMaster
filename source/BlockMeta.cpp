@@ -60,5 +60,16 @@ sptr<NodeMeta> BlockMeta::FindNode( size_t sessesion_id )
 
 sptr<NodeMeta> BlockMeta::IdleNode()
 {
-    return nullptr;
+    sptr<NodeMeta> result = nullptr;
+
+    for ( auto & b : this->node_list_ )
+    {
+        if ( result == nullptr ||
+             result->Session()->BlockCount() > b->Session()->BlockCount() )
+        {
+            result = b;
+        }
+    }
+
+    return result;
 }

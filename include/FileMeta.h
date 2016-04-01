@@ -44,7 +44,7 @@ public:
     ~FileMeta () { };
                             
     bool IsOpened()             { return this->is_open_ == true;    };
-    size_t Size()               { return size_;                     };
+    size_t Size();
     string Name()               { return name_;                     };
     string OwnerToken()         { return this->owner_token_;        };
     sptr<Path> FilePath()       { return this->path_;               };

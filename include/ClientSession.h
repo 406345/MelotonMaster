@@ -33,6 +33,7 @@ limitations under the License.
 #include <FileMeta.h>
 #include <ClientTokenPool.h>
 #include <MessageSyncBlock.pb.h>
+#include <MessagePrepareReadACK.pb.h>
 
 using std::vector;
 
@@ -45,6 +46,7 @@ public:
     void        CloseFile    ();
     void        SetState     ( ClientState state );
     void        SetBlockNum  ( size_t num );
+    void        AddBlock     ( uptr<MessagePrepareReadACK> ack );
     void        AddBlock     ( uptr<MessagePrepareWriteACK> ack );
 
     void              OpenToken( sptr<ClientToken> token ) { this->open_token_ = token; }
@@ -63,7 +65,8 @@ private:
     sptr<FileMeta>      opened_file_     = nullptr;
     sptr<ClientToken>   open_token_      = nullptr;
 
-    vector<uptr<MessagePrepareWriteACK>> block_list_;
+    vector<uptr<MessagePrepareWriteACK>> write_block_list_;
+    vector<uptr<MessagePrepareReadACK>> read_block_list_;
 };
 
 #endif // !CLIENT_SESSION_H_ 

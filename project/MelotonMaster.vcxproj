@@ -162,6 +162,8 @@
     <ClCompile Include="..\message\MessageRead.pb.cc" />
     <ClCompile Include="..\message\MessageReadBlock.pb.cc" />
     <ClCompile Include="..\message\MessageSyncBlock.pb.cc" />
+    <ClCompile Include="..\message\MessageTell.pb.cc" />
+    <ClCompile Include="..\message\MessageTellACK.pb.cc" />
     <ClCompile Include="..\message\MessageWrite.pb.cc" />
     <ClCompile Include="..\source\BlockMeta.cpp" />
     <ClCompile Include="..\source\ClientListener.cpp" />
@@ -197,6 +199,8 @@
     <ClInclude Include="..\handler\MessageReadBlockHandler.h" />
     <ClInclude Include="..\handler\MessageReadHandler.h" />
     <ClInclude Include="..\handler\MessageSyncBlockHandler.h" />
+    <ClInclude Include="..\handler\MessageTellACKHandler.h" />
+    <ClInclude Include="..\handler\MessageTellHandler.h" />
     <ClInclude Include="..\handler\MessageWriteHandler.h" />
     <ClInclude Include="..\include\BlockMeta.h" />
     <ClInclude Include="..\include\ClientListener.h" />
@@ -231,6 +235,8 @@
     <ClInclude Include="..\message\MessageRead.pb.h" />
     <ClInclude Include="..\message\MessageReadBlock.pb.h" />
     <ClInclude Include="..\message\MessageSyncBlock.pb.h" />
+    <ClInclude Include="..\message\MessageTell.pb.h" />
+    <ClInclude Include="..\message\MessageTellACK.pb.h" />
     <ClInclude Include="..\message\MessageWrite.pb.h" />
     <ClInclude Include="..\test\DirectoryMetaTest.hpp" />
     <ClInclude Include="..\test\TestClass.hpp" />

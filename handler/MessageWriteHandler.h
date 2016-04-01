@@ -30,6 +30,7 @@ limitations under the License.
 #include <MessagePrepareWrite.pb.h>
 #include <NodeSessionPool.h>
 #include <NodeSession.h>
+#include <MessageError.pb.h>
 
 static int MessageWriteHandler( MRT::Session * session , uptr<MessageWrite> message )
 {
@@ -68,19 +69,33 @@ static int MessageWriteHandler( MRT::Session * session , uptr<MessageWrite> mess
 
     for ( size_t i = 0; i < blocks.size(); i++ )
     {
-        uptr<MessagePrepareWrite> msg = make_uptr( MessagePrepareWrite );
         auto block = blocks[i];
+        auto node  = block->IdleNode();
+
+        if ( node == nullptr )
+        {
+            auto reply = make_uptr( MessageError );
+            reply->set_code( ERR_NO_NODE );
+            reply->set_message( "can't find any node" );
+            client->SendMessageW( move_ptr( reply ) );
+            return -1;
+        }
+
+        uptr<MessagePrepareWrite> msg = make_uptr( MessagePrepareWrite );
+        msg->set_isnew( false );
         msg->set_clientid( client->Id() );
         msg->set_fileoffset( block->FileOffset() );
-        msg->set_index( block->IdleNode()->Index() );
+        msg->set_index( node->Index() );
         msg->set_partid( block->PartId() );
-        block->IdleNode()->Session()->SendMessage( move_ptr( msg ) );
+        msg->set_path( t->Path() );
+        node->Session()->SendMessage( move_ptr( msg ) );
         offset+= block->Size();
     }
 
     for ( size_t i = 0; i < new_block_num; i++ )
     {
         uptr<MessagePrepareWrite> msg = make_uptr( MessagePrepareWrite );
+        msg->set_isnew( true );
         msg->set_clientid( client->Id() );
         msg->set_fileoffset( offset );
         msg->set_index( 0 );

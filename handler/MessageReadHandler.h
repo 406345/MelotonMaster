@@ -23,8 +23,62 @@ limitations under the License.
 #include <string>
 #include <MRT.h>
 #include <MessageRead.pb.h>
+#include <ClientTokenPool.h>
+#include <FileDictionary.h>
+#include <ClientSession.h>
+#include <MessagePrepareRead.pb.h>
 
 static int MessageReadHandler( MRT::Session * session , uptr<MessageRead> message )
 {
+    auto client    = scast<ClientSession*>( session );
+    auto token_str = message->token();
+    auto size      = message->size();
+    auto offset    = message->offset();
+
+    auto token     = ClientTokenPool::Instance()->CheckToken( token_str );
+
+    if ( token == nullptr )
+    {
+        return -1;
+    }
+
+    auto file = FileDictionary::Instance()->FindFile( make_sptr( Path , token->Path() ) );
+
+    if ( file == nullptr )
+    { 
+        auto err_msg = make_uptr( MessageError );
+        err_msg->set_code( ERR_FILE_NOT_EXIST  );
+        err_msg->set_message( "file do not exist" );
+        client->SendMessageW( move_ptr( err_msg ) );
+        return -1;
+    }
+
+    auto block_list = file->BlockRange( offset , size );
+
+    client->SetBlockNum( block_list.size() );
+    client->SetState( ClientState::kWaitingForBlock );
+
+    for ( size_t i = 0; i < block_list.size(); i++ )
+    {
+        auto block = block_list[i];
+        auto node  = block->IdleNode();
+
+        if ( node == nullptr )
+        {
+            auto reply = make_uptr( MessageError );
+            reply->set_code( ERR_NO_NODE );
+            reply->set_message( "can't find any node" );
+            client->SendMessageW( move_ptr( reply ) );
+            return -1;
+        }
+
+        uptr<MessagePrepareRead> msg = make_uptr( MessagePrepareRead );
+        msg->set_clientid( client->Id() );
+        msg->set_index( node->Index() );
+        node->Session()->SendMessage( move_ptr( msg ) );
+        offset+= block->Size();
+    }
+
+
     return 0;
 }

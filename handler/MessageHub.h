@@ -35,6 +35,10 @@
 #include "MessageReadBlock.pb.h"
 #include "MessageSyncBlockHandler.h"
 #include "MessageSyncBlock.pb.h"
+#include "MessageTellHandler.h"
+#include "MessageTell.pb.h"
+#include "MessageTellACKHandler.h"
+#include "MessageTellACK.pb.h"
 #include "MessageWriteHandler.h"
 #include "MessageWrite.pb.h"
 
@@ -168,6 +172,18 @@ public:
                 auto msg = new MessageSyncBlock( );
                 msg->ParseFromArray( data, msg_len );
                 return MessageSyncBlockHandler( session , std::move( std::unique_ptr<MessageSyncBlock>( msg ) ) );
+            }break;
+        case 0x54656761737F6D6F : 
+            {
+                auto msg = new MessageTell( );
+                msg->ParseFromArray( data, msg_len );
+                return MessageTellHandler( session , std::move( std::unique_ptr<MessageTell>( msg ) ) );
+            }break;
+        case 0x54656F63737F6D6F : 
+            {
+                auto msg = new MessageTellACK( );
+                msg->ParseFromArray( data, msg_len );
+                return MessageTellACKHandler( session , std::move( std::unique_ptr<MessageTellACK>( msg ) ) );
             }break;
         case 0x5765676177776D7F : 
             {

@@ -23,9 +23,14 @@ limitations under the License.
 #include <string>
 #include <MRT.h>
 #include <MessageBlockMeta.pb.h>
+#include <FileDictionary.h>
 
 static int MessageBlockMetaHandler( MRT::Session * session , uptr<MessageBlockMeta> message )
 {
+
+    FileDictionary::Instance()->AddBlockMeta( 
+            scast<NodeSession*>( session ) , 
+            *message.get() );
 
     return 0;
 }

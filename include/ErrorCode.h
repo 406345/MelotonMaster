@@ -30,5 +30,6 @@ limitations under the License.
 static const int ERR_FILE_NOT_EXIST           = 0x100;
 static const int ERR_FILE_ALREADY_OPENTED     = 0x101;
 static const int ERR_FILE_OPEN_FAILED         = 0x101;
+static const int ERR_NO_NODE                  = 0x200;
 
 #endif // !ERROR_CODE_H_

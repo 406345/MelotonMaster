@@ -1,5 +1,17 @@
 #include <FileMeta.h>
 
+size_t FileMeta::Size()
+{
+    size_t size = 0;
+
+    for ( auto & b : this->block_list_ )
+    {
+        size+=b->Size();
+    }
+
+    return size;
+}
+
 void FileMeta::FilePath( sptr<Path> value )
 {
     this->path_ = value;
@@ -38,8 +50,8 @@ bool FileMeta::AddBlock( sptr<BlockMeta> block )
         }
     }
 
-    this->block_list_.push_back( move_ptr( block ) );
     this->size_ += block->BlockSize();
+    this->block_list_.push_back( move_ptr( block ) );
 
     return true;
 }

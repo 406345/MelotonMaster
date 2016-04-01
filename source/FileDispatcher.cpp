@@ -22,7 +22,7 @@ size_t FileDispatcher::DispatchWrite( sptr<ClientToken> token ,
 
     for ( auto & b : blocks )
     {
-        blocks_size += b->BlockSize();
+        blocks_size += b->Size();
     }
 
     if ( tail > blocks_size )
