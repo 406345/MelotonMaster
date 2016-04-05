@@ -24,13 +24,13 @@ void FileDictionary::AddBlockMeta( NodeSession * session ,
     if ( block == nullptr )
     {
         block = make_sptr( BlockMeta );
-        file->AddBlock      ( block );
     }
 
     block->PartId       ( message.partid() );
     block->BlockSize    ( 0 );
     block->FileOffset   ( message.fileoffset() );
     block->Size         ( message.size() );
+    file->AddBlock      ( block );
 
     node = block->FindNode( session->Id() );
 
@@ -39,6 +39,8 @@ void FileDictionary::AddBlockMeta( NodeSession * session ,
         node = make_sptr( NodeMeta , message.index() , session );
         block->AddNode( node );
     }
+
+    session->AddBlock( block );
 }
 
 sptr<FileMeta> FileDictionary::FindFile( sptr<Path> path )

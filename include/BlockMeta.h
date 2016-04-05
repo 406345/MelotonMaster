@@ -28,6 +28,7 @@ limitations under the License.
 #define BLOCK_META_H_
 
 #include <vector>
+#include <MRT.h>
 #include <NodeMeta.h>
 
 using std::vector;
@@ -49,7 +50,9 @@ public:
     void            FileOffset   ( size_t value );
 
     void            AddNode      ( sptr<NodeMeta> nodemeta );
-    sptr<NodeMeta>  FindNode     ( size_t sessesion_id);
+    void            RemoveNode   ( size_t session_id );
+
+    sptr<NodeMeta>  FindNode     ( size_t session_id);
     sptr<NodeMeta>  IdleNode     ();
 
 private:

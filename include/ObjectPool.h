@@ -100,7 +100,7 @@ public:
         if ( callback == nullptr )
             return;
 
-        Sort( 0 , this->pool.size() - 1 , callback );
+        Sort( 0 , (int)this->pool.size() - 1 , callback );
     }
 
 

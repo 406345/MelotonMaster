@@ -1,4 +1,5 @@
 #include "BlockMeta.h"
+#include <NodeSession.h>
 
 size_t BlockMeta::PartId()
 {
@@ -45,11 +46,24 @@ void BlockMeta::AddNode( sptr<NodeMeta> nodemeta )
     this->node_list_.push_back( nodemeta );
 }
 
-sptr<NodeMeta> BlockMeta::FindNode( size_t sessesion_id )
+void BlockMeta::RemoveNode( size_t session_id )
+{
+    for ( auto p = this->node_list_.begin(); p != this->node_list_.end(); p++ )
+    {
+        if ( ( *p )->Session()->Id() == session_id )
+        {
+            this->node_list_.erase( p );
+            return;
+        }
+    }
+
+}
+
+sptr<NodeMeta> BlockMeta::FindNode( size_t session_id )
 {
     for ( auto & n : this->node_list_ )
     {
-        if ( n->Session()->Id() == sessesion_id )
+        if ( n->Session()->Id() == session_id )
         {
             return n;
         }

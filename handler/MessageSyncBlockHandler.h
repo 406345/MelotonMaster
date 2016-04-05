@@ -31,7 +31,7 @@ static int MessageSyncBlockHandler( MRT::Session * session , uptr<MessageSyncBlo
     {
         FileDictionary::Instance()->AddBlockMeta( 
             scast<NodeSession*>( session ) , 
-            message->blocks(i) );
+            message->blocks((int)i) );
     }
     return 0;
 }

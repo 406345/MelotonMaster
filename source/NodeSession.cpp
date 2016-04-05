@@ -26,6 +26,16 @@ limitations under the License.
 
 #include <NodeSession.h>
 
+NodeSession::NodeSession()
+{
+    this->UpdateAliveTime();
+}
+
+
+NodeSession::~NodeSession()
+{
+}
+
 void NodeSession::UpdateAliveTime()
 {
     this->alive_time_ = Timer::Tick() / 1000;
@@ -34,4 +44,17 @@ void NodeSession::UpdateAliveTime()
 size_t NodeSession::AliveTime()
 {
     return ( Timer::Tick() / 1000 - this->alive_time_ );
+}
+
+void NodeSession::AddBlock( sptr<BlockMeta> blockMeta )
+{
+    this->block_list_.push_back( blockMeta );
+}
+
+void NodeSession::RemvoeBlock()
+{
+    for ( auto & block : this->block_list_ )
+    {
+        block->RemoveNode( this->Id() );
+    }
 }

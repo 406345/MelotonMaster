@@ -55,6 +55,15 @@ static int MessageReadHandler( MRT::Session * session , uptr<MessageRead> messag
 
     auto block_list = file->BlockRange( offset , size );
 
+    if ( block_list.size() == 0 )
+    {
+        auto err_msg = make_uptr( MessageError );
+        err_msg->set_code( ERR_NO_BLOCK  );
+        err_msg->set_message( "block do not exist" );
+        client->SendMessageW( move_ptr( err_msg ) );
+        return -1;
+    }
+
     client->SetBlockNum( block_list.size() );
     client->SetState( ClientState::kWaitingForBlock );
 

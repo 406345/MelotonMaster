@@ -32,24 +32,24 @@ limitations under the License.
 
 NodeListener::NodeListener()
     : MRT::Listener( "0.0.0.0" , 100 )
-{ 
+{
     Logger::Sys( "node listener IP : %:%" , this->Address().c_str() , this->Port() );
 
     MRT::SyncWorker::Create(
         1000 ,
         [ ] ( MRT::SyncWorker* worker )
-        {
-           
-            NodeSessionPool::Instance()->Each( [ ] ( NodeSession* session )
-            {
-                if( session->AliveTime() > NODE_TIMEOUT )
-                {
-                    session->Close();
-                }
-            } );
+    {
 
-            return false;
-        } , nullptr , nullptr );
+        NodeSessionPool::Instance()->Each( [ ] ( NodeSession* session )
+        {
+            if ( session->AliveTime() > NODE_TIMEOUT )
+            {
+                session->Close();
+            }
+        } );
+
+        return false;
+    } , nullptr , nullptr );
 }
 
 NodeListener::~NodeListener()
@@ -64,13 +64,16 @@ Session * NodeListener::CreateSession()
 
 void NodeListener::OnSessionOpen( Session * session )
 {
-    NodeSessionPool::Instance()->Push( scast<NodeSession*>( session ) );
-    Logger::Log( "<%:%> node connected" , session->ip_address() , session->port() );
+    auto node = scast<NodeSession*>( session );
+    NodeSessionPool::Instance()->Push( node );
+    Logger::Log( "node(%:%) connected" , session->ip_address() , session->port() );
 }
 
 void NodeListener::OnSessionClose( Session * session )
 {
-    NodeSessionPool::Instance()->Pop( scast<NodeSession*>( session ) );
-     Logger::Log( "<%:%> node disconnected" , session->ip_address() , session->port() );
+    auto node = scast<NodeSession*>( session );
+    node->RemvoeBlock();
+    NodeSessionPool::Instance()->Pop( node );
+    Logger::Log( "node(%:%) disconnected" , session->ip_address() , session->port() );
     SAFE_DELETE( session );
 }

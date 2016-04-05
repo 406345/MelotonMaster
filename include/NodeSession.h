@@ -27,23 +27,20 @@ limitations under the License.
 #ifndef NODE_SESSION_H_
 #define NODE_SESSION_H_
 
+#include <vector>
 #include <MRT.h>
 #include <MelotonSession.h>
+#include <BlockMeta.h>
+
+using std::vector;
 
 class NodeSession
     : public MelotonSession
 {
 public:
 
-    NodeSession  ()
-    {
-        this->UpdateAliveTime();
-    };
-
-    ~NodeSession ()
-    {
-
-    };
+    NodeSession         ();
+    ~NodeSession        ();
 
     void UpdateAliveTime();
 
@@ -57,12 +54,17 @@ public:
     void   Memory       ( size_t value ) { this->memory_      = value; }
     void   BlockCount   ( size_t value ) { this->block_count_ = value; }
 
+    void   AddBlock     ( sptr<BlockMeta> blockMeta );
+    void   RemvoeBlock  ();
+
 private:
 
     size_t alive_time_  = 0;
     size_t cpu_         = 0;
     size_t memory_      = 0;
     size_t block_count_ = 0;
+
+    vector<sptr<BlockMeta>> block_list_;
 };
 
 #endif // !NODE_SESSION_H_ 
