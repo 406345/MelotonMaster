@@ -152,7 +152,11 @@
     <ClCompile Include="..\message\MessageBlockData.pb.cc" />
     <ClCompile Include="..\message\MessageBlockList.pb.cc" />
     <ClCompile Include="..\message\MessageBlockMeta.pb.cc" />
+    <ClCompile Include="..\message\MessageDuplicateBlock.pb.cc" />
+    <ClCompile Include="..\message\MessageDuplicateData.pb.cc" />
+    <ClCompile Include="..\message\MessageDuplicateDataAccept.pb.cc" />
     <ClCompile Include="..\message\MessageError.pb.cc" />
+    <ClCompile Include="..\message\MessageNewBlock.pb.cc" />
     <ClCompile Include="..\message\MessageOpenACK.pb.cc" />
     <ClCompile Include="..\message\MessageOpenFile.pb.cc" />
     <ClCompile Include="..\message\MessagePrepareRead.pb.cc" />
@@ -188,8 +192,12 @@
     <ClInclude Include="..\handler\MessageBlockDataHandler.h" />
     <ClInclude Include="..\handler\MessageBlockListHandler.h" />
     <ClInclude Include="..\handler\MessageBlockMetaHandler.h" />
+    <ClInclude Include="..\handler\MessageDuplicateBlockHandler.h" />
+    <ClInclude Include="..\handler\MessageDuplicateDataAcceptHandler.h" />
+    <ClInclude Include="..\handler\MessageDuplicateDataHandler.h" />
     <ClInclude Include="..\handler\MessageErrorHandler.h" />
     <ClInclude Include="..\handler\MessageHub.h" />
+    <ClInclude Include="..\handler\MessageNewBlockHandler.h" />
     <ClInclude Include="..\handler\MessageOpenACKHandler.h" />
     <ClInclude Include="..\handler\MessageOpenFileHandler.h" />
     <ClInclude Include="..\handler\MessagePrepareReadACKHandler.h" />
@@ -225,7 +233,11 @@
     <ClInclude Include="..\message\MessageBlockData.pb.h" />
     <ClInclude Include="..\message\MessageBlockList.pb.h" />
     <ClInclude Include="..\message\MessageBlockMeta.pb.h" />
+    <ClInclude Include="..\message\MessageDuplicateBlock.pb.h" />
+    <ClInclude Include="..\message\MessageDuplicateData.pb.h" />
+    <ClInclude Include="..\message\MessageDuplicateDataAccept.pb.h" />
     <ClInclude Include="..\message\MessageError.pb.h" />
+    <ClInclude Include="..\message\MessageNewBlock.pb.h" />
     <ClInclude Include="..\message\MessageOpenACK.pb.h" />
     <ClInclude Include="..\message\MessageOpenFile.pb.h" />
     <ClInclude Include="..\message\MessagePrepareRead.pb.h" />

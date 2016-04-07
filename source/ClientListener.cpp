@@ -5,6 +5,7 @@
 ClientListener::ClientListener( string address , int port )
     : MRT::Listener( address , port )
 {
+    Logger::Log( "client listener on %:%" , address , port );
 }
 
 ClientListener::~ClientListener()

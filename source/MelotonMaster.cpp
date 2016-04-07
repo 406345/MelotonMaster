@@ -11,8 +11,8 @@ int main( int argc , char* argv[] )
 { 
     Logger::Sys("meloton master start");
 
-    MRT::Maraton::Instance()->Regist( make_sptr( NodeListener ) );
-    MRT::Maraton::Instance()->Regist( make_sptr( ClientListener , "0.0.0.0" , 101) );
+    MRT::Maraton::Instance()->Regist( make_sptr( NodeListener , "0.0.0.0" , MASTER_NODE_PORT ) );
+    MRT::Maraton::Instance()->Regist( make_sptr( ClientListener , "0.0.0.0" , MASTER_CLIENT_PORT) );
 
     while ( true )
     {

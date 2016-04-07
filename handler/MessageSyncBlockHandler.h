@@ -33,5 +33,6 @@ static int MessageSyncBlockHandler( MRT::Session * session , uptr<MessageSyncBlo
             scast<NodeSession*>( session ) , 
             message->blocks((int)i) );
     }
+
     return 0;
 }

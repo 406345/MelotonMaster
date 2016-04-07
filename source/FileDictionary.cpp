@@ -30,6 +30,7 @@ void FileDictionary::AddBlockMeta( NodeSession * session ,
     block->BlockSize    ( 0 );
     block->FileOffset   ( message.fileoffset() );
     block->Size         ( message.size() );
+    block->Parent       ( file );
     file->AddBlock      ( block );
 
     node = block->FindNode( session->Id() );

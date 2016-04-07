@@ -27,6 +27,7 @@ limitations under the License.
 #ifndef NODE_LISTENER_H_
 #define NODE_LISTENER_H_
 
+#include <string>
 #include <MRT.h>
 #include <ObjectPool.h>
 
@@ -37,7 +38,7 @@ class NodeListener
 {
 public:
 
-    NodeListener ( ) ; 
+    NodeListener ( std::string ip , int port ) ; 
     ~NodeListener( );
 
 protected:

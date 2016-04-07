@@ -54,7 +54,6 @@ static int MessageWriteHandler( MRT::Session * session , uptr<MessageWrite> mess
         return -1;
     }
 
-
     auto block_num      = FileDispatcher::Instance()->DispatchWrite( t , 
                                                                      offset ,
                                                                      size );

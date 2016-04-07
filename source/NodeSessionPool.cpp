@@ -45,3 +45,17 @@ NodeSession * NodeSessionPool::AvailableNode()
 
     return this->First();
 }
+
+NodeSession * NodeSessionPool::AvailableDuplicateNode( NodeSession * session )
+{
+    this->Sort( [ ] ( NodeSession* left , NodeSession * right ) { 
+        return left->BlockCount() > right->BlockCount();
+    } );
+
+    return this->Find( [ session ] ( NodeSession* node ) { 
+        if ( node->Id() != session->Id() )
+        {
+            return node;
+        }
+    } );
+}

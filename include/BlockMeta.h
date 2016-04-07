@@ -33,6 +33,8 @@ limitations under the License.
 
 using std::vector;
 
+class FileMeta;
+
 class BlockMeta
 {
 public: 
@@ -51,9 +53,13 @@ public:
 
     void            AddNode      ( sptr<NodeMeta> nodemeta );
     void            RemoveNode   ( size_t session_id );
+    size_t          NodeCount    ();
 
     sptr<NodeMeta>  FindNode     ( size_t session_id);
     sptr<NodeMeta>  IdleNode     ();
+
+    sptr<FileMeta>  Parent       ();
+    void            Parent       ( sptr<FileMeta> parent );
 
 private:
 
@@ -63,6 +69,7 @@ private:
     size_t block_size_  = 0;
 
     vector<sptr<NodeMeta>> node_list_;
+    sptr<FileMeta>         parent_;
 };
 
 #endif // !BLOCK_META_H_ 

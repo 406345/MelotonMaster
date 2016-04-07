@@ -1,5 +1,6 @@
 #include "BlockMeta.h"
 #include <NodeSession.h>
+#include <FileMeta.h>
 
 size_t BlockMeta::PartId()
 {
@@ -59,6 +60,11 @@ void BlockMeta::RemoveNode( size_t session_id )
 
 }
 
+size_t BlockMeta::NodeCount()
+{
+    return this->node_list_.size();
+}
+
 sptr<NodeMeta> BlockMeta::FindNode( size_t session_id )
 {
     for ( auto & n : this->node_list_ )
@@ -86,4 +92,14 @@ sptr<NodeMeta> BlockMeta::IdleNode()
     }
 
     return result;
+}
+
+sptr<FileMeta> BlockMeta::Parent()
+{
+    return this->parent_;
+}
+
+void BlockMeta::Parent( sptr<FileMeta> parent )
+{
+    this->parent_ = parent;
 }

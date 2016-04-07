@@ -30,10 +30,10 @@ limitations under the License.
 #include <MRT.h>
 #include <MelotonMaster.h>
 
-NodeListener::NodeListener()
-    : MRT::Listener( "0.0.0.0" , 100 )
+NodeListener::NodeListener( std::string ip , int port )
+    : MRT::Listener( ip , port )
 {
-    Logger::Sys( "node listener IP : %:%" , this->Address().c_str() , this->Port() );
+    Logger::Sys( "node listener on %:%" , this->Address().c_str() , this->Port() );
 
     MRT::SyncWorker::Create(
         1000 ,
