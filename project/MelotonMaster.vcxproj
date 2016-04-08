@@ -180,6 +180,7 @@
     <ClCompile Include="..\source\FileDispatcher.cpp" />
     <ClCompile Include="..\source\FileMeta.cpp" />
     <ClCompile Include="..\source\HTTPListener.cpp" />
+    <ClCompile Include="..\source\HTTPRouter.cpp" />
     <ClCompile Include="..\source\HTTPSession.cpp" />
     <ClCompile Include="..\source\MelotonMaster.cpp" />
     <ClCompile Include="..\source\MelotonSession.cpp" />
@@ -225,6 +226,8 @@
     <ClInclude Include="..\include\FileDispatcher.h" />
     <ClInclude Include="..\include\FileMeta.h" />
     <ClInclude Include="..\include\HTTPListener.h" />
+    <ClInclude Include="..\include\HTTPRouter.h" />
+    <ClInclude Include="..\include\HTTPRouterHandler.h" />
     <ClInclude Include="..\include\HTTPSession.h" />
     <ClInclude Include="..\include\Json.hpp" />
     <ClInclude Include="..\include\MelotonMaster.h" />

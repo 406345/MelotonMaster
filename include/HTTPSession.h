@@ -31,6 +31,8 @@ limitations under the License.
 
 using namespace MRT;
 
+class HTTPRouter;
+
 class HTTPSession : 
     public Session
 {
@@ -43,15 +45,12 @@ protected:
 
     // Callback when network data is arrived
     // @data : received data 
-    virtual void OnRead     ( uptr<Buffer> data ) override;
-
-    virtual void OnRequest  ( sptr<HTTPRequest> request , 
-                              sptr<HTTPResponse> response );
+    virtual void OnRead     ( uptr<Buffer> data ) override; 
 
 private:
 
-    sptr<HTTPRequest>   request_ = nullptr;
-    sptr<HTTPResponse>  response = nullptr;
+    sptr<HTTPRequest>   request_ = nullptr; 
+    sptr<HTTPRouter>    router_  = nullptr;
 };
 
 #endif // !HTTP_SESSION_H_ 

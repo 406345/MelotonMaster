@@ -58,6 +58,12 @@ sptr<FileMeta> FileDictionary::CreateFile( sptr<Path> path )
     return file;
 }
 
+sptr<DirectorMeta> FileDictionary::FindDir( string path )
+{
+    auto dir = this->director_->FindDirector( make_sptr( Path , path ) );
+    return dir;
+}
+
 FileDictionary::FileDictionary()
 {
     this->director_ = make_sptr( DirectorMeta );

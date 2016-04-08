@@ -139,6 +139,9 @@
     <ClCompile Include="..\source\HTTPSession.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\HTTPRouter.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\message\MessageAlive.pb.h">
@@ -347,6 +350,12 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Json.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\HTTPRouter.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\HTTPRouterHandler.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

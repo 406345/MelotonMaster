@@ -93,6 +93,16 @@ bool DirectorMeta::ExistFile( sptr<Path> path )
     return this->FindFile( path ) != nullptr;
 }
 
+vector<sptr<DirectorMeta>> DirectorMeta::ChildrenDir( )
+{
+    return this->children_dir_list_;
+}
+
+vector<sptr<FileMeta>> DirectorMeta::Files( )
+{
+    return this->file_list_;
+}
+
 sptr<DirectorMeta> DirectorMeta::find_dir( string name )
 {
     if ( this->path_ == name )

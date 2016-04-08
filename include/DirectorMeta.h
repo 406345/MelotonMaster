@@ -57,6 +57,9 @@ public:
     sptr<DirectorMeta> MakeDirector ( sptr<Path> path );
     bool               ExistFile    ( sptr<Path> path );
 
+    vector<sptr<DirectorMeta>> ChildrenDir( );
+    vector<sptr<FileMeta>>     Files( );
+
 private:
 
     string                     path_                = "/";

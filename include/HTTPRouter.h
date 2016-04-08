@@ -1,5 +1,5 @@
 /***********************************************************************************
-This file is part of Project for MaratonFramework
+This file is part of Project for Meloton
 For the latest info, see  https://github.com/Yhgenomics/MelotonMaster.git
 
 Copyright 2016 Yhgenomics
@@ -24,36 +24,37 @@ limitations under the License.
 * Modifed       : When      | Who       | What
 ***********************************************************************************/
 
-#ifndef FILE_DIECTIONARY_H_
-#define FILE_DIECTIONARY_H_
+#ifndef HTTP_ROUTER_H_
+#define HTTP_ROUTER_H_
 
-#include <MelotonMaster.h>
-#include <DirectorMeta.h>
-#include <MessageBlockMeta.pb.h>
-#include <NodeSession.h>
-#include <FileMeta.h>
-#include <Path.h>
+#include <map>
+#include <functional>
+#include <string>
+#include <MRT.h>
+#include <HTTPSession.h>
 
-class FileDictionary
+using namespace std;
+using namespace MRT;
+
+class HTTPRouter
 {
 public:
 
-    SINGLETON_DEF( FileDictionary );
+    HTTPRouter  ( );
+    ~HTTPRouter ( );
 
-    void           AddBlockMeta ( NodeSession* session , 
-                                  const MessageBlockMeta & message );
-
-    sptr<FileMeta> FindFile     ( sptr<Path> path );
-    sptr<FileMeta> CreateFile   ( sptr<Path> path );
-
-    sptr<DirectorMeta> FindDir  ( string path );
+    void Route  ( HTTPSession *session ,
+                  sptr<HTTPRequest> request ,
+                  sptr<HTTPResponse> response);
 
 private:
 
-    FileDictionary ();
-    ~FileDictionary();
+    typedef function<void( HTTPSession *session , 
+                           sptr<HTTPRequest> request , 
+                           sptr<HTTPResponse> )> router_handler_t;
+    std::map<string , router_handler_t> router_;
 
-    sptr<DirectorMeta> director_ = nullptr;
+    void Register( string url , router_handler_t call );
 };
 
-#endif // !FILE_DIECTIONARY_H_
+#endif // HTTP_ROUTER_H_
