@@ -69,10 +69,13 @@ static int MessageNewBlockHandler( MRT::Session * session , uptr<MessageNewBlock
             if ( duplicate_delta > 0 )
             {
                 auto duplicate_msg = make_uptr( MessageDuplicateBlock );
-                duplicate_msg->set_address  ( obj->ip_address() );
-                duplicate_msg->set_port     ( DUPLICATE_PORT );
-                duplicate_msg->set_index    ( p_msg->index() );
-                duplicate_msg->set_token    ( p_msg->token() );
+                duplicate_msg->set_address    ( node->ip_address() );
+                duplicate_msg->set_port       ( NODE_CLIENT_PORT );
+                duplicate_msg->set_index      ( p_msg->index() );
+                duplicate_msg->set_token      ( p_msg->token() );
+                duplicate_msg->set_path       ( p_msg->path() );
+                duplicate_msg->set_partid     ( p_msg->partid() );
+                duplicate_msg->set_fileoffset ( p_msg->fileoffset() );
                 obj->SendMessage( move_ptr( duplicate_msg ) );
             }
             --duplicate_delta;

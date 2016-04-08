@@ -155,6 +155,7 @@
     <ClCompile Include="..\message\MessageDuplicateBlock.pb.cc" />
     <ClCompile Include="..\message\MessageDuplicateData.pb.cc" />
     <ClCompile Include="..\message\MessageDuplicateDataAccept.pb.cc" />
+    <ClCompile Include="..\message\MessageDuplicateDataRequest.pb.cc" />
     <ClCompile Include="..\message\MessageError.pb.cc" />
     <ClCompile Include="..\message\MessageNewBlock.pb.cc" />
     <ClCompile Include="..\message\MessageOpenACK.pb.cc" />
@@ -178,6 +179,8 @@
     <ClCompile Include="..\source\FileDictionary.cpp" />
     <ClCompile Include="..\source\FileDispatcher.cpp" />
     <ClCompile Include="..\source\FileMeta.cpp" />
+    <ClCompile Include="..\source\HTTPListener.cpp" />
+    <ClCompile Include="..\source\HTTPSession.cpp" />
     <ClCompile Include="..\source\MelotonMaster.cpp" />
     <ClCompile Include="..\source\MelotonSession.cpp" />
     <ClCompile Include="..\source\NodeListener.cpp" />
@@ -195,6 +198,7 @@
     <ClInclude Include="..\handler\MessageDuplicateBlockHandler.h" />
     <ClInclude Include="..\handler\MessageDuplicateDataAcceptHandler.h" />
     <ClInclude Include="..\handler\MessageDuplicateDataHandler.h" />
+    <ClInclude Include="..\handler\MessageDuplicateDataRequestHandler.h" />
     <ClInclude Include="..\handler\MessageErrorHandler.h" />
     <ClInclude Include="..\handler\MessageHub.h" />
     <ClInclude Include="..\handler\MessageNewBlockHandler.h" />
@@ -220,6 +224,9 @@
     <ClInclude Include="..\include\FileDictionary.h" />
     <ClInclude Include="..\include\FileDispatcher.h" />
     <ClInclude Include="..\include\FileMeta.h" />
+    <ClInclude Include="..\include\HTTPListener.h" />
+    <ClInclude Include="..\include\HTTPSession.h" />
+    <ClInclude Include="..\include\Json.hpp" />
     <ClInclude Include="..\include\MelotonMaster.h" />
     <ClInclude Include="..\include\MelotonSession.h" />
     <ClInclude Include="..\include\NodeListener.h" />
@@ -236,6 +243,7 @@
     <ClInclude Include="..\message\MessageDuplicateBlock.pb.h" />
     <ClInclude Include="..\message\MessageDuplicateData.pb.h" />
     <ClInclude Include="..\message\MessageDuplicateDataAccept.pb.h" />
+    <ClInclude Include="..\message\MessageDuplicateDataRequest.pb.h" />
     <ClInclude Include="..\message\MessageError.pb.h" />
     <ClInclude Include="..\message\MessageNewBlock.pb.h" />
     <ClInclude Include="..\message\MessageOpenACK.pb.h" />

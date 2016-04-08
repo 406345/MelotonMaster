@@ -1,11 +1,15 @@
 /***********************************************************************************
 This file is part of Project for Meloton
-For the latest info, see  https://github.com/Yhgenomics/MelotonClient.git
+For the latest info, see  https://github.com/Yhgenomics/MelotonMaster.git
+
 Copyright 2016 Yhgenomics
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
+
 http://www.apache.org/licenses/LICENSE-2.0
+
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,17 +18,46 @@ limitations under the License.
 ***********************************************************************************/
 
 /***********************************************************************************
-* Description   : MessageDuplicateDataAccept handler.
-* Creator       : Shubo Yang(shuboyang@yhgenomics.com)
-* Date          : 2016-04-08
-* Modifed       : 2016-04-08      | Shubo Yang      | Create
+* Description   :
+* Creator       : Shubo Yang
+* Date          :
+* Modifed       : When      | Who       | What
 ***********************************************************************************/
+
+#ifndef HTTP_LISTENER_H_
+#define HTTP_LISTENER_H_
 
 #include <string>
 #include <MRT.h>
-#include <MessageDuplicateDataAccept.pb.h>
+#include <HTTPSession.h>
+#include <MelotonMaster.h>
 
-static int MessageDuplicateDataAcceptHandler( MRT::Session * session , uptr<MessageDuplicateDataAccept> message )
+using std::string;
+using MRT::Listener;
+
+class HTTPListener :
+    public Listener
 {
-    return 0;
-}
+public:
+    HTTPListener( string address , int port )
+        : Listener( address , port )
+    {
+        Logger::Log( "http listener on %:%" , address , port );
+    };
+
+    ~HTTPListener()
+    {
+        
+    };
+protected:
+
+    virtual Session * CreateSession    () override;
+
+    // Callback when a session is created
+    virtual void      OnSessionOpen   ( Session * session ) override;
+
+    // Callback after a session is closed
+    virtual void      OnSessionClose  ( Session * session ) override;
+};
+
+#endif // !HTTP_LISTENER_H_ 

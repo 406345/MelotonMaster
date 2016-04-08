@@ -5,6 +5,7 @@
 #include <ObjectPool.h>
 #include <MelotonMaster.h>
 #include <Path.h>
+#include <HTTPListener.h>
 #include <DirectoryMetaTest.hpp>
 
 int main( int argc , char* argv[] )
@@ -13,6 +14,7 @@ int main( int argc , char* argv[] )
 
     MRT::Maraton::Instance()->Regist( make_sptr( NodeListener , "0.0.0.0" , MASTER_NODE_PORT ) );
     MRT::Maraton::Instance()->Regist( make_sptr( ClientListener , "0.0.0.0" , MASTER_CLIENT_PORT) );
+    MRT::Maraton::Instance()->Regist( make_sptr( HTTPListener , "0.0.0.0" , HTTP_PORT) );
 
     while ( true )
     {

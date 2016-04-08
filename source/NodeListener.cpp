@@ -44,7 +44,8 @@ NodeListener::NodeListener( std::string ip , int port )
         {
             if ( session->AliveTime() > NODE_TIMEOUT )
             {
-                session->Close();
+                Logger::Error( "session(%:%) timeout" , session->ip_address() , session->port() );
+                //session->Close();
             }
         } );
 

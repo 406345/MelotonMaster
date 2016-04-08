@@ -130,6 +130,15 @@
     <ClCompile Include="..\message\MessageNewBlock.pb.cc">
       <Filter>message</Filter>
     </ClCompile>
+    <ClCompile Include="..\message\MessageDuplicateDataRequest.pb.cc">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\HTTPListener.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\HTTPSession.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\message\MessageAlive.pb.h">
@@ -324,6 +333,21 @@
     </ClInclude>
     <ClInclude Include="..\message\MessageNewBlock.pb.h">
       <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\handler\MessageDuplicateDataRequestHandler.h">
+      <Filter>handler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\message\MessageDuplicateDataRequest.pb.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\HTTPListener.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\HTTPSession.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Json.hpp">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

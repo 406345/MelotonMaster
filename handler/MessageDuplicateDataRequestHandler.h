@@ -14,7 +14,7 @@ limitations under the License.
 ***********************************************************************************/
 
 /***********************************************************************************
-* Description   : MessageDuplicateDataAccept handler.
+* Description   : MessageDuplicateDataRequest handler.
 * Creator       : Shubo Yang(shuboyang@yhgenomics.com)
 * Date          : 2016-04-08
 * Modifed       : 2016-04-08      | Shubo Yang      | Create
@@ -22,9 +22,9 @@ limitations under the License.
 
 #include <string>
 #include <MRT.h>
-#include <MessageDuplicateDataAccept.pb.h>
+#include <MessageDuplicateDataRequest.pb.h>
 
-static int MessageDuplicateDataAcceptHandler( MRT::Session * session , uptr<MessageDuplicateDataAccept> message )
+static int MessageDuplicateDataRequestHandler( MRT::Session * session , uptr<MessageDuplicateDataRequest> message )
 {
     return 0;
 }
