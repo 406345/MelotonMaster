@@ -66,7 +66,14 @@ public:
 
         for ( auto s : this->path_list_ )
         {
-            ret = ret + s + "/";
+            if ( s == "/" )
+            {
+                ret = ret + s;
+            }
+            else
+            {
+                ret = ret + s + "/";
+            }
         }
 
         return (ret + this->filename_);

@@ -22,10 +22,19 @@ bool DirectorMeta::operator==( sptr<DirectorMeta> meta )
 
 sptr<DirectorMeta> DirectorMeta::FindDirector( sptr<Path> path )
 {
-    auto pDirectorMeta = this->shared_from_this();
-    for ( auto p : path->PathList() )
+    auto plist         = path->PathList();
+
+    if ( plist.size() == 0 )
     {
-        auto child = pDirectorMeta->find_dir( p );
+        return nullptr;
+    }
+
+    auto pDirectorMeta = this->find_dir( *plist.begin() );
+    plist.erase( plist.begin() );
+
+    for ( auto p : plist )
+    { 
+        auto child = pDirectorMeta->find_dir_children( p );
         if ( child == nullptr )
         {
             return nullptr;
@@ -116,5 +125,18 @@ sptr<DirectorMeta> DirectorMeta::find_dir( string name )
         }
     }
 
+    return nullptr;
+}
+
+sptr<DirectorMeta> DirectorMeta::find_dir_children( string name )
+{
+    for ( auto d : this->children_dir_list_ )
+    {
+        if ( d->path_ == name )
+        {
+            return d;
+        }
+    }
+    
     return nullptr;
 }

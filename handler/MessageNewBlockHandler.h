@@ -52,35 +52,54 @@ static int MessageNewBlockHandler( MRT::Session * session , uptr<MessageNewBlock
 
     auto duplicate_delta = DUPLICATE_COUNT - block->NodeCount();
 
-    if ( duplicate_delta <= 0 )
-        return 0;
-
-    NodeSessionPool::Instance()->Sort( [ ] ( NodeSession* left , NodeSession * right ) { 
-        return left->BlockCount() > right->BlockCount();
-    } );
-
-    auto p_msg = message.get();
-
-    NodeSessionPool::Instance()->Each( [ &duplicate_delta , 
-                                       node , 
-                                       p_msg ] ( NodeSession* obj ) { 
-        if ( obj->Id() != node->Id() )
+    if ( duplicate_delta == 0 )
+    {
+        auto nl = block->NodeList();
+        
+        for ( auto & n : nl )
         {
-            if ( duplicate_delta > 0 )
-            {
-                auto duplicate_msg = make_uptr( MessageDuplicateBlock );
-                duplicate_msg->set_address    ( node->ip_address() );
-                duplicate_msg->set_port       ( NODE_CLIENT_PORT );
-                duplicate_msg->set_index      ( p_msg->index() );
-                duplicate_msg->set_token      ( p_msg->token() );
-                duplicate_msg->set_path       ( p_msg->path() );
-                duplicate_msg->set_partid     ( p_msg->partid() );
-                duplicate_msg->set_fileoffset ( p_msg->fileoffset() );
-                obj->SendMessage( move_ptr( duplicate_msg ) );
-            }
-            --duplicate_delta;
+            auto duplicate_msg = make_uptr( MessageDuplicateBlock );
+            duplicate_msg->set_address    ( n->Session()->ip_address() );
+            duplicate_msg->set_port       ( NODE_CLIENT_PORT );
+            duplicate_msg->set_index      ( message->index() );
+            duplicate_msg->set_token      ( message->token() );
+            duplicate_msg->set_path       ( message->path() );
+            duplicate_msg->set_partid     ( message->partid() );
+            duplicate_msg->set_fileoffset ( message->fileoffset() );
+            n->Session()->SendMessage( move_ptr( duplicate_msg ) );
         }
-    } );
+    }
+    else
+    {
+        NodeSessionPool::Instance()->Sort( [ ] ( NodeSession* left , NodeSession * right )
+        {
+            return left->BlockCount() > right->BlockCount();
+        } );
+
+        auto p_msg = message.get();
+
+        NodeSessionPool::Instance()->Each( [&duplicate_delta ,
+                                           node ,
+                                           p_msg] ( NodeSession* obj )
+        {
+            if ( obj->Id() != node->Id() )
+            {
+                if ( duplicate_delta > 0 )
+                {
+                    auto duplicate_msg = make_uptr( MessageDuplicateBlock );
+                    duplicate_msg->set_address    ( node->ip_address() );
+                    duplicate_msg->set_port       ( NODE_CLIENT_PORT );
+                    duplicate_msg->set_index      ( p_msg->index() );
+                    duplicate_msg->set_token      ( p_msg->token() );
+                    duplicate_msg->set_path       ( p_msg->path() );
+                    duplicate_msg->set_partid     ( p_msg->partid() );
+                    duplicate_msg->set_fileoffset ( p_msg->fileoffset() );
+                    obj->SendMessage( move_ptr( duplicate_msg ) );
+                }
+                --duplicate_delta;
+            }
+        } );
+    }
 
     return 0;
 }

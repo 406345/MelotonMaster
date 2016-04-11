@@ -33,6 +33,7 @@ limitations under the License.
 #include <Json.hpp>
 #include <NodeSessionPool.h>
 #include <FileDictionary.h>
+#include <Path.h>
 
 using namespace MRT;
 using namespace nlohmann;
@@ -57,7 +58,8 @@ static void HTTPMETHOD( Node )
         obj.push_back( jnode );
     } );
 
-    response->Content( make_uptr( Buffer , obj.dump( ) ) );
+    auto result_str = obj.dump();
+    response->Content( make_uptr( Buffer , result_str.c_str() , result_str.size() ) );
 };
 
 static void HTTPMETHOD( File )
@@ -67,8 +69,35 @@ static void HTTPMETHOD( File )
 
     try
     {
-        input = json::parse( string( request->Content( )->Data( ) ,
-                             request->Content( )->Size( ) ) );
+        auto   url  = request->Uri();
+        string filepath = url->Parameter( "path" );
+        auto   file     = FileDictionary::Instance()->FindFile( make_sptr( Path ,
+                                                                filepath ) );
+
+        if ( file == nullptr )
+            return;
+
+        result["path"] = file->FilePath()->ToFullPath();
+        result["size"] = file->Size();
+
+        for ( auto & block : file->BlockList() )
+        {
+            json b;
+            b["partid"]     = block->PartId();
+            b["size"]       = block->Size();
+            b["nodecount"]  = block->NodeCount();
+            b["node"]       = nlohmann::json::array();
+
+            for ( auto & node : block->NodeList() )
+            {
+                json nd;
+                nd["address"] = node->Session()->ip_address();
+                b["node"].push_back( nd );
+            }
+
+            result["block"].push_back( b );
+        }
+
     }
     catch ( exception ee )
     {
@@ -76,22 +105,8 @@ static void HTTPMETHOD( File )
         return;
     }
     
-    auto filepath = result["path"];
-    auto file     = FileDictionary::Instance( )->FindFile( make_sptr( Path , 
-                                                                      filepath ) );
-    result["path"] = file->FilePath( )->ToFullPath();
-    result["size"] = file->Size( );
-
-    for ( auto & block : file->BlockList( ) )
-    {
-        json b;
-        b["partid"] = block->PartId( );
-        b["size"] = block->Size( );
-        b["nodecount"] = block->NodeCount( );
-        result["block"].push_back( b );
-    }
-
-    response->Content( make_uptr( Buffer , result.dump( ) ) );
+    auto result_str = result.dump();
+    response->Content( make_uptr( Buffer , result_str.c_str() , result_str.size() ) );
 };
 
 static void HTTPMETHOD( Dir )
@@ -101,8 +116,33 @@ static void HTTPMETHOD( Dir )
 
     try
     {
-        input = json::parse( string( request->Content( )->Data( ) ,
-                             request->Content( )->Size( ) ) );
+
+        auto   url  = request->Uri();
+        string path = url->Parameter("path");
+        auto   dir  = FileDictionary::Instance()->FindDir( path );
+
+        if ( dir != nullptr )
+        {
+            result["dir"] = nlohmann::json::array();
+            for ( auto & cd : dir->ChildrenDir() )
+            {
+                json cdir;
+                cdir["path"] = cd->Name();
+                result["dir"].push_back( cdir );
+            }
+            result["dircount"] = dir->ChildrenDir().size();
+
+            result["file"] = nlohmann::json::array();
+            for ( auto & file : dir->Files() )
+            {
+                json cfile;
+                cfile["path"]       = file->FilePath()->ToFullPath();
+                cfile["size"]       = file->Size();
+                cfile["blockcount"] = file->BlockList().size();
+                result["file"].push_back( cfile );
+            }
+            result["filecount"] = dir->Files().size();
+        }
     }
     catch ( exception ee )
     {
@@ -110,31 +150,8 @@ static void HTTPMETHOD( Dir )
         return;
     }
     
-    auto dir_path = result["path"];
-    auto dir = FileDictionary::Instance( )->FindDir( dir_path );
-
-    if ( dir != nullptr )
-    {
-        result["path"] = dir_path;
-        
-        for ( auto & cd : dir->ChildrenDir( ) )
-        {
-            json cdir;
-            cdir["path"] = cd->Name( );
-            result["dir"].push_back( cdir );
-        }
-
-        for ( auto & file : dir->Files() )
-        {
-            json cfile;
-            cfile["name"]       = file->Name( );
-            cfile["size"]       = file->Size( );
-            cfile["blockcount"] = file->BlockList.Size( );
-            result["file"].push_back( cfile );
-        }
-    }
-
-    response->Content( make_uptr( Buffer , result.dump( ) ) );
+    auto result_str = result.dump();
+    response->Content( make_uptr( Buffer , result_str.c_str() , result_str.size() ) );
 };
 
 #endif // !HTTP_ROUTER_HANDLER_H_

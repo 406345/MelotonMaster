@@ -41,6 +41,7 @@ public:
     NodeSession* FindById               ( size_t id );
     NodeSession* AvailableNode          ();
     NodeSession* AvailableDuplicateNode ( NodeSession * session );
+    void         SortDesc               ();
 
 private:
 

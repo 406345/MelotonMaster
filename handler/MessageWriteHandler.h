@@ -91,23 +91,34 @@ static int MessageWriteHandler( MRT::Session * session , uptr<MessageWrite> mess
         offset+= block->Size();
     }
 
-    for ( size_t i = 0; i < new_block_num; i++ )
-    {
+    int index = 0;
+    
+    NodeSessionPool::Instance()->SortDesc();
+    NodeSessionPool::Instance()->Loop( [ client , 
+                                       &offset , 
+                                       new_part , 
+                                       t , 
+                                       &index ,
+                                       &new_block_num ] ( NodeSession* node ) { 
+
+        if ( new_block_num == 0 )
+            return true;
+
         uptr<MessagePrepareWrite> msg = make_uptr( MessagePrepareWrite );
         msg->set_isnew( true );
         msg->set_clientid( client->Id() );
         msg->set_fileoffset( offset );
         msg->set_index( 0 );
-        msg->set_partid( new_part + i );
+        msg->set_partid( new_part + index );
         msg->set_path( t->Path() );
-        offset += BLOCK_SIZE;
+        node->SendMessage( move_ptr( msg ) );
 
-        NodeSession * node = NodeSessionPool::Instance()->AvailableNode();
-        if ( node != nullptr )
-        {
-            node->SendMessage( move_ptr( msg ) );
-        }
-    }
+        offset += BLOCK_SIZE;
+        --new_block_num;
+        ++index;
+
+        return false;
+    } ); 
 
     return 0;
 }

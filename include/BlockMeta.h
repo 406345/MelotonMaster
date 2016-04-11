@@ -57,6 +57,7 @@ public:
 
     sptr<NodeMeta>  FindNode     ( size_t session_id);
     sptr<NodeMeta>  IdleNode     ();
+    vector<sptr<NodeMeta>> NodeList() { return this->node_list_; };
 
     sptr<FileMeta>  Parent       ();
     void            Parent       ( sptr<FileMeta> parent );

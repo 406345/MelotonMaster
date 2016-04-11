@@ -25,8 +25,21 @@ void HTTPSession::OnRead( uptr<Buffer> data )
         this->router_->Route( this ,
                               this->request_ ,
                               reponse_ );
-        this->Send( move_ptr( reponse_->BuildHeader() ) );
-        this->Send( move_ptr( reponse_->BuildBody() ) );
+
+        auto header_data = reponse_->BuildHeader();
+        auto body_data = reponse_->BuildBody();
+
+        if ( header_data != nullptr &&
+             header_data->Size() != 0 )
+        {
+            this->Send( move_ptr( reponse_->BuildHeader() ) );
+        }
+
+        if ( body_data != nullptr &&
+             body_data->Size() != 0 )
+        {
+            this->Send( move_ptr( reponse_->BuildBody() ) );
+        }
 
         this->Close();
     }

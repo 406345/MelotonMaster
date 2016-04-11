@@ -59,3 +59,11 @@ NodeSession * NodeSessionPool::AvailableDuplicateNode( NodeSession * session )
         }
     } );
 }
+
+void NodeSessionPool::SortDesc()
+{
+    this->Sort( [ ] ( NodeSession* left , NodeSession * right ) { 
+        return left->BlockCount() > right->BlockCount();
+    } );
+
+}

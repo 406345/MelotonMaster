@@ -27,6 +27,9 @@ limitations under the License.
 
 static int MessageBlockMetaHandler( MRT::Session * session , uptr<MessageBlockMeta> message )
 {
+    if ( message->size() == 0 )
+        return 0;
+
     FileDictionary::Instance()->AddBlockMeta( 
             scast<NodeSession*>( session ) , 
             *message.get() );

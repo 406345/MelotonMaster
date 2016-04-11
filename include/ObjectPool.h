@@ -138,6 +138,25 @@ public:
         }
     }
 
+    // Loop until return true
+    // return true if find the object
+    // @callback : use lamda expression to select the object
+    //             void( TYPE * object )
+    void Loop( FindType callback )
+    {
+        if ( callback == nullptr )
+            return;
+
+        while ( true )
+        {
+            for ( auto object : this->pool )
+            {
+                if ( callback( object ) == true )
+                    return;
+            }
+        }
+    }
+
     // Get the first element in pool
     TYPE First()
     {

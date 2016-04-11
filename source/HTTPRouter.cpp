@@ -4,7 +4,7 @@
 
 HTTPRouter::HTTPRouter( )
 {
-    this->Register( "/v1/nodes" ,   HTTPHandlerNode );
+    this->Register( "/v1/node" ,   HTTPHandlerNode );
     this->Register( "/v1/file" ,    HTTPHandlerFile );
     this->Register( "/v1/dir" ,     HTTPHandlerDir );
     this->Register( "/v1/status" ,  HTTPHandlerNode );
@@ -18,7 +18,8 @@ void HTTPRouter::Route( HTTPSession * session ,
                         sptr<HTTPRequest> request , 
                         sptr<HTTPResponse> response )
 {
-    auto call = this->router_[request->RequestUrl( )];
+    auto uri  = request->Uri();
+    auto call = this->router_[uri->Path()];
 
     if ( call != nullptr )
     {
@@ -28,7 +29,7 @@ void HTTPRouter::Route( HTTPSession * session ,
     else
     {
         response->Status( 404 );
-        response->Content( make_uptr( Buffer , "" , 0 ) );
+        response->Content( make_uptr( Buffer , "Request url is not found" ) );
     }
 }
 

@@ -123,6 +123,11 @@ void Path::ParsePath()
                 last_spliter_pos ,
                 pos - last_spliter_pos );
 
+            if ( fname.empty() )
+            {
+                fname = "/";
+            }
+
             this->path_list_.push_back( fname );
             last_spliter_pos = pos + 1;
         }

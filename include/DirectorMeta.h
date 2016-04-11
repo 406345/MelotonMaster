@@ -68,6 +68,7 @@ private:
     vector<sptr<FileMeta>>     file_list_;
 
     sptr<DirectorMeta>         find_dir( string name );
+    sptr<DirectorMeta>         find_dir_children( string name );
 
 };
 
