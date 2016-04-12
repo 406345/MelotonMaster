@@ -38,10 +38,10 @@ limitations under the License.
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Const Section
  * * * * * * * * * * * * * * * * * * * * * * * * * * */
-static const size_t NODE_TIMEOUT         = 5000;
-static const size_t BLOCK_SIZE           = 1024 * 1024 * 16;
-static const size_t DUPLICATE_COUNT      = 3;
-static const int    DUPLICATE_PORT       = 99;
+static const long long NODE_TIMEOUT         = 5000;
+static const long long BLOCK_SIZE           = 1024 * 1024 * 16;
+static const long long DUPLICATE_COUNT      = 3;
+static const int       DUPLICATE_PORT       = 99;
 
 static const int    MASTER_NODE_PORT     = 110;
 static const int    MASTER_CLIENT_PORT   = 111;
