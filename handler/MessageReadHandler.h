@@ -49,7 +49,7 @@ static int MessageReadHandler( MRT::Session * session , uptr<MessageRead> messag
         auto err_msg = make_uptr( MessageError );
         err_msg->set_code( ERR_FILE_NOT_EXIST  );
         err_msg->set_message( "file do not exist" );
-        client->SendMessageW( move_ptr( err_msg ) );
+        client->SendMessage( move_ptr( err_msg ) );
         return -1;
     }
 
@@ -60,7 +60,7 @@ static int MessageReadHandler( MRT::Session * session , uptr<MessageRead> messag
         auto err_msg = make_uptr( MessageError );
         err_msg->set_code( ERR_NO_BLOCK  );
         err_msg->set_message( "block do not exist" );
-        client->SendMessageW( move_ptr( err_msg ) );
+        client->SendMessage( move_ptr( err_msg ) );
         return -1;
     }
 
@@ -77,7 +77,7 @@ static int MessageReadHandler( MRT::Session * session , uptr<MessageRead> messag
             auto reply = make_uptr( MessageError );
             reply->set_code( ERR_NO_NODE );
             reply->set_message( "can't find any node" );
-            client->SendMessageW( move_ptr( reply ) );
+            client->SendMessage( move_ptr( reply ) );
             return -1;
         }
 

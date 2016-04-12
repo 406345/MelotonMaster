@@ -50,7 +50,7 @@ static int MessageTellHandler( MRT::Session * session , uptr<MessageTell> messag
         auto err_msg = make_uptr( MessageError );
         err_msg->set_code( ERR_FILE_NOT_EXIST  );
         err_msg->set_message( "file do not exist" );
-        client->SendMessageW( move_ptr( err_msg ) );
+        client->SendMessage( move_ptr( err_msg ) );
         return -1;
     }
 

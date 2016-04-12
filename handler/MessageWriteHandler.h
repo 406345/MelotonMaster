@@ -76,7 +76,7 @@ static int MessageWriteHandler( MRT::Session * session , uptr<MessageWrite> mess
             auto reply = make_uptr( MessageError );
             reply->set_code( ERR_NO_NODE );
             reply->set_message( "can't find any node" );
-            client->SendMessageW( move_ptr( reply ) );
+            client->SendMessage( move_ptr( reply ) );
             return -1;
         }
 
