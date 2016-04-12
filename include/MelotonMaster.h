@@ -47,6 +47,7 @@ static const int    MASTER_NODE_PORT     = 110;
 static const int    MASTER_CLIENT_PORT   = 111;
 static const int    NODE_CLIENT_PORT     = 112;
 static const int    HTTP_PORT            = 80;
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Macro Function Section
  * * * * * * * * * * * * * * * * * * * * * * * * * * */

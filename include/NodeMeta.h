@@ -27,6 +27,8 @@ limitations under the License.
 #ifndef NODE_META_H_
 #define NODE_META_H_
 
+#include <stddef.h>
+
 class NodeSession;
 
 class NodeMeta
