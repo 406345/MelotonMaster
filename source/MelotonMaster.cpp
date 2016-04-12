@@ -5,8 +5,7 @@
 #include <ObjectPool.h>
 #include <MelotonMaster.h>
 #include <Path.h>
-#include <HTTPListener.h>
-#include <DirectoryMetaTest.hpp>
+#include <HTTPListener.h> 
 
 int main( int argc , char* argv[] )
 { 
