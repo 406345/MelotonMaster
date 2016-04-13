@@ -66,6 +66,12 @@ static int MessageWriteHandler( MRT::Session * session , uptr<MessageWrite> mess
     auto new_block_num  = block_num - blocks.size();
     auto new_part       = blocks.size();
 
+    Logger::Log( "% write % part %-%" , 
+                 session->ip_address() , 
+                 t->Path() ,
+                 blocks.size() , 
+                 new_block_num);
+
     for ( size_t i = 0; i < blocks.size(); i++ )
     {
         auto block = blocks[i];

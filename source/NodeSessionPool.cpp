@@ -53,10 +53,7 @@ NodeSession * NodeSessionPool::AvailableDuplicateNode( NodeSession * session )
     } );
 
     return this->Find( [ session ] ( NodeSession* node ) { 
-        if ( node->Id() != session->Id() )
-        {
-            return node;
-        }
+        return node->Id() == session->Id();
     } );
 }
 
