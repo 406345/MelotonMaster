@@ -34,6 +34,7 @@ limitations under the License.
 #include <ClientTokenPool.h>
 #include <MessageSyncBlock.pb.h>
 #include <MessagePrepareReadACK.pb.h>
+#include <MessageDeleteBlockACK.pb.h>
 
 using std::vector;
 
@@ -48,6 +49,7 @@ public:
     void        SetBlockNum  ( size_t num );
     void        AddBlock     ( uptr<MessagePrepareReadACK> ack );
     void        AddBlock     ( uptr<MessagePrepareWriteACK> ack );
+    void        AddBlock     ( uptr<MessageDeleteBlockACK> ack );
 
     void              OpenToken( sptr<ClientToken> token ) { this->open_token_ = token; }
     sptr<ClientToken> OpenToken() { return this->open_token_; }
@@ -66,6 +68,7 @@ private:
     sptr<ClientToken>   open_token_      = nullptr;
 
     vector<uptr<MessagePrepareWriteACK>> write_block_list_;
+    vector<uptr<MessageDeleteBlockACK>> delete_block_list_;
     vector<uptr<MessagePrepareReadACK>> read_block_list_;
 };
 

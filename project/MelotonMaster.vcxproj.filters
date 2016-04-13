@@ -142,6 +142,18 @@
     <ClCompile Include="..\source\HTTPRouter.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="..\message\MessageDeleteBlock.pb.cc">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\message\MessageDeleteBlockACK.pb.cc">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\message\MessageDeleteFile.pb.cc">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\message\MessageDeleteFileACK.pb.cc">
+      <Filter>message</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\message\MessageAlive.pb.h">
@@ -357,6 +369,30 @@
     </ClInclude>
     <ClInclude Include="..\include\HTTPRouterHandler.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\handler\MessageDeleteBlockACKHandler.h">
+      <Filter>handler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\handler\MessageDeleteBlockHandler.h">
+      <Filter>handler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\handler\MessageDeleteFileACKHandler.h">
+      <Filter>handler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\handler\MessageDeleteFileHandler.h">
+      <Filter>handler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\message\MessageDeleteBlock.pb.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\message\MessageDeleteBlockACK.pb.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\message\MessageDeleteFile.pb.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\message\MessageDeleteFileACK.pb.h">
+      <Filter>message</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

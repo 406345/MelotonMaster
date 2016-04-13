@@ -30,7 +30,13 @@ limitations under the License.
 static const int ERR_FILE_NOT_EXIST           = 0x100;
 static const int ERR_FILE_ALREADY_OPENTED     = 0x101;
 static const int ERR_FILE_OPEN_FAILED         = 0x101;
+
 static const int ERR_NO_NODE                  = 0x200;
+
 static const int ERR_NO_BLOCK                 = 0x300;
+
+static const int ERR_TOKEN_NOT_EXIST          = 0x400;
+
+static const int ERR_INVAILED_CLIENT          = 0x500;
 
 #endif // !ERROR_CODE_H_

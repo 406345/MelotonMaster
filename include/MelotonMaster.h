@@ -69,9 +69,10 @@ enum MelotonSessionParseState
 
 enum ClientState
 {
-    kIdle = 1 ,
-    kWaitingForBlock = 2,
-    kTransfer
+    kIdle               = 1 ,
+    kWaitingForBlock    = 2,
+    kTransfer           = 4 ,
+    kWaitingForDelete   = 8
 };
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *

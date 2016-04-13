@@ -152,6 +152,10 @@
     <ClCompile Include="..\message\MessageBlockData.pb.cc" />
     <ClCompile Include="..\message\MessageBlockList.pb.cc" />
     <ClCompile Include="..\message\MessageBlockMeta.pb.cc" />
+    <ClCompile Include="..\message\MessageDeleteBlock.pb.cc" />
+    <ClCompile Include="..\message\MessageDeleteBlockACK.pb.cc" />
+    <ClCompile Include="..\message\MessageDeleteFile.pb.cc" />
+    <ClCompile Include="..\message\MessageDeleteFileACK.pb.cc" />
     <ClCompile Include="..\message\MessageDuplicateBlock.pb.cc" />
     <ClCompile Include="..\message\MessageDuplicateData.pb.cc" />
     <ClCompile Include="..\message\MessageDuplicateDataAccept.pb.cc" />
@@ -196,6 +200,10 @@
     <ClInclude Include="..\handler\MessageBlockDataHandler.h" />
     <ClInclude Include="..\handler\MessageBlockListHandler.h" />
     <ClInclude Include="..\handler\MessageBlockMetaHandler.h" />
+    <ClInclude Include="..\handler\MessageDeleteBlockACKHandler.h" />
+    <ClInclude Include="..\handler\MessageDeleteBlockHandler.h" />
+    <ClInclude Include="..\handler\MessageDeleteFileACKHandler.h" />
+    <ClInclude Include="..\handler\MessageDeleteFileHandler.h" />
     <ClInclude Include="..\handler\MessageDuplicateBlockHandler.h" />
     <ClInclude Include="..\handler\MessageDuplicateDataAcceptHandler.h" />
     <ClInclude Include="..\handler\MessageDuplicateDataHandler.h" />
@@ -243,6 +251,10 @@
     <ClInclude Include="..\message\MessageBlockData.pb.h" />
     <ClInclude Include="..\message\MessageBlockList.pb.h" />
     <ClInclude Include="..\message\MessageBlockMeta.pb.h" />
+    <ClInclude Include="..\message\MessageDeleteBlock.pb.h" />
+    <ClInclude Include="..\message\MessageDeleteBlockACK.pb.h" />
+    <ClInclude Include="..\message\MessageDeleteFile.pb.h" />
+    <ClInclude Include="..\message\MessageDeleteFileACK.pb.h" />
     <ClInclude Include="..\message\MessageDuplicateBlock.pb.h" />
     <ClInclude Include="..\message\MessageDuplicateData.pb.h" />
     <ClInclude Include="..\message\MessageDuplicateDataAccept.pb.h" />

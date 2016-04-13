@@ -1,5 +1,6 @@
 #include <ClientSession.h>
 #include <MessageBlockList.pb.h>
+#include <MessageDeleteFileACK.pb.h>
 
 void ClientSession::OpenFile( sptr<FileMeta> file )
 {
@@ -55,7 +56,6 @@ void ClientSession::AddBlock( uptr<MessagePrepareReadACK> ack )
         this->Close();
     }
 }
-
 void ClientSession::AddBlock( uptr<MessagePrepareWriteACK> ack )
 { 
     this->write_block_list_.push_back( move_ptr( ack ) );
@@ -81,6 +81,25 @@ void ClientSession::AddBlock( uptr<MessagePrepareWriteACK> ack )
     }
 
 }
+
+void ClientSession::AddBlock( uptr<MessageDeleteBlockACK> ack )
+{
+    this->delete_block_list_.push_back( move_ptr( ack ) );
+    
+    if ( this->delete_block_list_.size() == this->block_total_num_ )
+    {
+        
+        uptr<MessageDeleteFileACK> msg = make_uptr( MessageDeleteFileACK );
+        msg->set_code( 0 );
+        msg->set_message( "" );
+        msg->set_path( ack->path() );
+        this->SendMessage( move_ptr( msg ) );
+
+        this->delete_block_list_.clear();
+        this->Close();
+    }
+}
+
 
 void ClientSession::OnClose()
 {
