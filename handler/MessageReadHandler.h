@@ -64,7 +64,7 @@ static int MessageReadHandler( MRT::Session * session , uptr<MessageRead> messag
         return -1;
     }
 
-    Logger::Log( "% read % block count %" , 
+    Logger::Log( "client % read % block %" , 
                  session->ip_address() , 
                  token->Path() ,
                  block_list.size() );

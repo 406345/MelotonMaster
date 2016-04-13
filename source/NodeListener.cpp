@@ -67,7 +67,7 @@ void NodeListener::OnSessionOpen( Session * session )
 {
     auto node = scast<NodeSession*>( session );
     NodeSessionPool::Instance()->Push( node );
-    Logger::Log( "node(%:%) connected" , session->ip_address() , session->port() );
+    Logger::Log( "node %:% connected" , session->ip_address() , session->port() );
 }
 
 void NodeListener::OnSessionClose( Session * session )
@@ -75,6 +75,6 @@ void NodeListener::OnSessionClose( Session * session )
     auto node = scast<NodeSession*>( session );
     node->RemvoeBlock();
     NodeSessionPool::Instance()->Pop( node );
-    Logger::Log( "node(%:%) disconnected" , session->ip_address() , session->port() );
+    Logger::Log( "node %:% disconnected" , session->ip_address() , session->port() );
     SAFE_DELETE( session );
 }

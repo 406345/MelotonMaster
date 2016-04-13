@@ -21,6 +21,10 @@ void HTTPSession::OnRead( uptr<Buffer> data )
 
     if ( request_->Finish() || request_->ContentLength() == 0 )
     {
+        Logger::Log( "HTTP % request %", 
+                     this->ip_address() , 
+                     request_->RequestUrl() );
+
         auto reponse_ = make_sptr( HTTPResponse );
         this->router_->Route( this ,
                               this->request_ ,
