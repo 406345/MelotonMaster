@@ -19,15 +19,15 @@ Session * ClientListener::CreateSession()
 
 void ClientListener::OnSessionOpen( Session * session )
 {
-    ClientPool::Instance()->Push( (ClientSession*)session );
-    Logger::Log( "client %:% connected", session->ip_address() , session->port() );
+    ClientPool::Instance()->Push( ( ClientSession* ) session );
+    Logger::Log( "client % connected" , session->ip_address() );
 }
 
 void ClientListener::OnSessionClose( Session * session )
 {
-    Logger::Log( "client %:% disconnected", session->ip_address() , session->port() );
+    Logger::Log( "client % disconnected" , session->ip_address() );
     ClientSession * client = ( ClientSession* ) session;
     client->CloseFile();
-    ClientPool::Instance()->Pop( (ClientSession*)session );
+    ClientPool::Instance()->Pop( ( ClientSession* ) session );
     SAFE_DELETE( session );
 }
