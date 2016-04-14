@@ -51,7 +51,7 @@ static int MessageNewBlockHandler( MRT::Session * session , uptr<MessageNewBlock
     }
 
     auto duplicate_delta = (int)DUPLICATE_COUNT - (int)block->NodeCount();
-
+    auto max_duolicate   = duplicate_delta;
     // If an exist file has been modified
     // Sync new data to all nodes
     if ( duplicate_delta == 0 )
@@ -77,6 +77,7 @@ static int MessageNewBlockHandler( MRT::Session * session , uptr<MessageNewBlock
         auto p_msg = message.get();
 
         NodeSessionPool::Instance()->Each( [&duplicate_delta ,
+                                           &max_duolicate ,
                                            node ,
                                            p_msg] ( NodeSession* obj )
         {
@@ -84,6 +85,13 @@ static int MessageNewBlockHandler( MRT::Session * session , uptr<MessageNewBlock
             {
                 if ( duplicate_delta > 0 )
                 {
+                    Logger::Log( "[%/%] duplicate % from % to % ", 
+                                 duplicate_delta,
+                                 max_duolicate,
+                                 p_msg->path() ,  
+                                 node->ip_address() ,
+                                 obj->ip_address() );
+
                     auto duplicate_msg = make_uptr( MessageDuplicateBlock );
                     duplicate_msg->set_address    ( node->ip_address() );
                     duplicate_msg->set_port       ( DUPLICATE_PORT );
