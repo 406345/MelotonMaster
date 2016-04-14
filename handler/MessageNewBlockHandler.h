@@ -85,9 +85,10 @@ static int MessageNewBlockHandler( MRT::Session * session , uptr<MessageNewBlock
             {
                 if ( duplicate_delta > 0 )
                 {
-                    Logger::Log( "[%/%] duplicate % from % to % ", 
+                    Logger::Log( "[%/%] duplicate(%) % from % to % ", 
                                  duplicate_delta,
                                  max_duolicate,
+                                 p_msg->partid(),
                                  p_msg->path() ,  
                                  node->ip_address() ,
                                  obj->ip_address() );
