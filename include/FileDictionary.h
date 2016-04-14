@@ -45,6 +45,7 @@ public:
 
     sptr<FileMeta> FindFile     ( sptr<Path> path );
     sptr<FileMeta> CreateFile   ( sptr<Path> path );
+    void           DeleteFile   ( sptr<FileMeta> file );
 
     sptr<DirectorMeta> FindDir  ( string path );
 

@@ -102,6 +102,24 @@ bool DirectorMeta::ExistFile( sptr<Path> path )
     return this->FindFile( path ) != nullptr;
 }
 
+bool DirectorMeta::DeleteFile( sptr<FileMeta> file )
+{
+    bool result = false;
+    auto f = this->FindDirector( file->FilePath() );
+
+    for ( auto itr = f->file_list_.begin(); itr != f->file_list_.end(); itr++ )
+    {
+        if ( *itr == file )
+        {
+            f->file_list_.erase( itr );
+            result = true;
+            break;
+        }
+    }
+     
+    return result;
+}
+
 vector<sptr<DirectorMeta>> DirectorMeta::ChildrenDir( )
 {
     return this->children_dir_list_;

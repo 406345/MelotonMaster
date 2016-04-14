@@ -1,4 +1,5 @@
 #include <FileMeta.h>
+#include <FileDictionary.h>
 
 size_t FileMeta::Size()
 {
@@ -58,19 +59,26 @@ bool FileMeta::AddBlock( sptr<BlockMeta> block )
 
 bool FileMeta::RemoveBlock( sptr<BlockMeta> block )
 {
+    bool result = false;
     for ( auto  i = this->block_list_.begin();
-                i != this->block_list_.end();
-                i++ )
+    i != this->block_list_.end();
+    i++ )
     {
         if ( ( *i )->PartId() == block->PartId() )
         {
             this->block_list_.erase( i );
-            return true;
+            result = true;
+            break;
         }
     }
 
-    return false;
-} 
+    if ( this->block_list_.size() == 0 )
+    {
+        FileDictionary::Instance()->DeleteFile( this->shared_from_this() );
+    }
+
+    return result;
+}
 
 sptr<BlockMeta> FileMeta::FindBlock( size_t block_id )
 {

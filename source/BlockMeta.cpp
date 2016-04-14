@@ -54,10 +54,14 @@ void BlockMeta::RemoveNode( size_t session_id )
         if ( ( *p )->Session()->Id() == session_id )
         {
             this->node_list_.erase( p );
-            return;
+            break;
         }
     }
 
+    if ( this->node_list_.size() == 0 )
+    {
+        this->parent_->RemoveBlock( this->shared_from_this() );
+    }
 }
 
 size_t BlockMeta::NodeCount()
