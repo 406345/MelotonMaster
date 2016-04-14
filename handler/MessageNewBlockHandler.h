@@ -50,8 +50,9 @@ static int MessageNewBlockHandler( MRT::Session * session , uptr<MessageNewBlock
         return 0;
     }
 
-    auto duplicate_delta = (int)DUPLICATE_COUNT - (int)block->NodeCount();
+    auto duplicate_delta = (int)DUPLICATE_COUNT - (int)block->NodeCount() + 1;
     auto max_duolicate   = duplicate_delta;
+
     // If an exist file has been modified
     // Sync new data to all nodes
     if ( duplicate_delta == 0 )
