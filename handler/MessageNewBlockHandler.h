@@ -52,6 +52,8 @@ static int MessageNewBlockHandler( MRT::Session * session , uptr<MessageNewBlock
 
     auto duplicate_delta = DUPLICATE_COUNT - block->NodeCount();
 
+    // If an exist file has been modified
+    // Sync new data to all nodes
     if ( duplicate_delta == 0 )
     {
         auto nl = block->NodeList();
@@ -71,11 +73,7 @@ static int MessageNewBlockHandler( MRT::Session * session , uptr<MessageNewBlock
     }
     else
     {
-        NodeSessionPool::Instance()->Sort( [ ] ( NodeSession* left , NodeSession * right )
-        {
-            return left->BlockCount() > right->BlockCount();
-        } );
-
+        NodeSessionPool::Instance()->SortDesc();
         auto p_msg = message.get();
 
         NodeSessionPool::Instance()->Each( [&duplicate_delta ,

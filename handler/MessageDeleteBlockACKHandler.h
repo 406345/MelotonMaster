@@ -38,7 +38,6 @@ static int MessageDeleteBlockACKHandler( MRT::Session * session , uptr<MessageDe
         return -1;
     }
 
-
     auto client = ClientPool::Instance()->FindById( message->clientid() );
 
     if ( client == nullptr )

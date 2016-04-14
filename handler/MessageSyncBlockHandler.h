@@ -27,11 +27,11 @@ limitations under the License.
 
 static int MessageSyncBlockHandler( MRT::Session * session , uptr<MessageSyncBlock> message )
 {
-    for ( size_t i = 0; i < message->blockcount(); i++ )
+    for ( size_t i = 0; i < ( size_t ) message->blockcount(); i++ )
     {
-        FileDictionary::Instance()->AddBlockMeta( 
-            scast<NodeSession*>( session ) , 
-            message->blocks((int)i) );
+        FileDictionary::Instance()->AddBlockMeta(
+            scast<NodeSession*>( session ) ,
+            message->blocks( ( int ) i ) );
     }
 
     return 0;
