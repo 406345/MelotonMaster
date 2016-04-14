@@ -61,7 +61,7 @@ static int MessageNewBlockHandler( MRT::Session * session , uptr<MessageNewBlock
         for ( auto & n : nl )
         {
             auto duplicate_msg = make_uptr( MessageDuplicateBlock );
-            duplicate_msg->set_address    ( n->Session()->ip_address() );
+            duplicate_msg->set_address    ( session->ip_address() );
             duplicate_msg->set_port       ( NODE_CLIENT_PORT );
             duplicate_msg->set_index      ( message->index() );
             duplicate_msg->set_token      ( message->token() );
