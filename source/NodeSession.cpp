@@ -48,6 +48,15 @@ size_t NodeSession::AliveTime()
 
 void NodeSession::AddBlock( sptr<BlockMeta> blockMeta )
 {
+    for ( auto & b : this->block_list_ )
+    {
+        if ( b->Parent() == blockMeta->Parent() &&
+             b->PartId() == blockMeta->PartId() )
+        {
+            return;
+        }
+    }
+
     this->block_list_.push_back( blockMeta );
 }
 

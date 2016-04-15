@@ -84,9 +84,4 @@ enum ClientState
 
 #endif // DEBUG
 
-#endif // !MELOTON_MASTER_H_
-
-
-
-
-
+#endif // !MELOTON_MASTER_H_ 
