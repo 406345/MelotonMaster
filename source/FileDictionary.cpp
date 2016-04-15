@@ -58,6 +58,11 @@ sptr<FileMeta> FileDictionary::CreateFile( sptr<Path> path )
     return file;
 }
 
+void FileDictionary::DeleteFile( sptr<FileMeta> file )
+{
+    this->director_->DeleteFile( file );
+}
+
 sptr<DirectorMeta> FileDictionary::FindDir( string path )
 {
     auto dir = this->director_->FindDirector( make_sptr( Path , path ) );

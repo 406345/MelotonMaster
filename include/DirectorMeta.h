@@ -56,6 +56,7 @@ public:
     bool               AddFile      ( sptr<FileMeta> file );
     sptr<DirectorMeta> MakeDirector ( sptr<Path> path );
     bool               ExistFile    ( sptr<Path> path );
+    bool               DeleteFile   ( sptr<FileMeta> file );
 
     vector<sptr<DirectorMeta>> ChildrenDir( );
     vector<sptr<FileMeta>>     Files( );

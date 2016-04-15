@@ -36,7 +36,8 @@ limitations under the License.
 using std::string;
 using std::vector;
 
-class FileMeta
+class FileMeta :
+    public std::enable_shared_from_this<FileMeta>
 {
 public:
 

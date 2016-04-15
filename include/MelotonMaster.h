@@ -40,7 +40,7 @@ limitations under the License.
  * * * * * * * * * * * * * * * * * * * * * * * * * * */
 static const long long NODE_TIMEOUT         = 5000;
 static const long long BLOCK_SIZE           = 1024 * 1024 * 16;
-static const long long DUPLICATE_COUNT      = 2;
+static const long long DUPLICATE_COUNT      = 1;
 
 static const int       MASTER_NODE_PORT     = 110;
 static const int       MASTER_CLIENT_PORT   = 111;

@@ -35,7 +35,8 @@ using std::vector;
 
 class FileMeta;
 
-class BlockMeta
+class BlockMeta :
+    public std::enable_shared_from_this<BlockMeta>
 {
 public: 
 
