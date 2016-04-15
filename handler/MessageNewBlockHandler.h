@@ -28,7 +28,8 @@ limitations under the License.
 #include <MessageDuplicateBlock.pb.h>
 
 static int MessageNewBlockHandler( MRT::Session * session , uptr<MessageNewBlock> message )
-{
+{ 
+
     auto node = scast<NodeSession*>( session );
     auto file = FileDictionary::Instance()->FindFile( make_sptr( Path , message->path() ) );
 
@@ -65,7 +66,7 @@ static int MessageNewBlockHandler( MRT::Session * session , uptr<MessageNewBlock
             duplicate_msg->set_address    ( session->ip_address() );
             duplicate_msg->set_port       ( DUPLICATE_PORT );
             duplicate_msg->set_index      ( message->index() );
-            duplicate_msg->set_token      ( message->token() );
+            duplicate_msg->set_token      ( "" );
             duplicate_msg->set_path       ( message->path() );
             duplicate_msg->set_partid     ( message->partid() );
             duplicate_msg->set_fileoffset ( message->fileoffset() );
@@ -98,7 +99,7 @@ static int MessageNewBlockHandler( MRT::Session * session , uptr<MessageNewBlock
                     duplicate_msg->set_address    ( node->ip_address() );
                     duplicate_msg->set_port       ( DUPLICATE_PORT );
                     duplicate_msg->set_index      ( p_msg->index() );
-                    duplicate_msg->set_token      ( p_msg->token() );
+                    duplicate_msg->set_token      ( "" );
                     duplicate_msg->set_path       ( p_msg->path() );
                     duplicate_msg->set_partid     ( p_msg->partid() );
                     duplicate_msg->set_fileoffset ( p_msg->fileoffset() );

@@ -107,6 +107,11 @@ bool DirectorMeta::DeleteFile( sptr<FileMeta> file )
     bool result = false;
     auto f = this->FindDirector( file->FilePath() );
 
+    if ( f == nullptr )
+    {
+        return result;
+    }
+
     for ( auto itr = f->file_list_.begin(); itr != f->file_list_.end(); itr++ )
     {
         if ( *itr == file )
