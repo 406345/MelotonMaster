@@ -40,8 +40,8 @@ class BlockMeta :
 {
 public: 
 
-    size_t          PartId      ();
-    void            PartId      ( size_t value );
+    size_t          PartId       ();
+    void            PartId       ( size_t value );
 
     size_t          Size         ();
     void            Size         ( size_t value );

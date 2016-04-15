@@ -23,16 +23,23 @@ void FileDictionary::AddBlockMeta( NodeSession * session ,
 
     if ( block == nullptr )
     {
-        block = make_sptr( BlockMeta );
+        block = make_sptr   ( BlockMeta );
+        block->PartId       ( message.partid() );
+        block->BlockSize    ( 0 );
+        block->FileOffset   ( message.fileoffset() );
+        block->Size         ( message.size() );
+        block->Parent       ( file );
+        file->AddBlock      ( block );
     }
-
-    block->PartId       ( message.partid() );
-    block->BlockSize    ( 0 );
-    block->FileOffset   ( message.fileoffset() );
-    block->Size         ( message.size() );
-    block->Parent       ( file );
-    file->AddBlock      ( block );
-
+    else
+    {
+        block->PartId       ( message.partid() );
+        block->BlockSize    ( 0 );
+        block->FileOffset   ( message.fileoffset() );
+        block->Size         ( message.size() );
+        block->Parent       ( file );
+    }
+   
     node = block->FindNode( session->Id() );
 
     if ( node == nullptr )
