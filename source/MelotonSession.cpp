@@ -32,7 +32,9 @@ MelotonSession::MelotonSession()
 {
     static size_t SessionId = 10000;
     this->id_ = SessionId;
-    SessionId = (++SessionId % 0xFFFFFFFFFFul);
+    SessionId = ( ++SessionId % 0xFFFFFFFFFFul );
+   
+    this->body_length_ = 0;
     this->parse_state_ = MelotonSessionParseState::kHead;
 }
 
@@ -41,23 +43,38 @@ MelotonSession::~MelotonSession()
 }
 
 void MelotonSession::SendMessage( uptr<google::protobuf::Message> message )
-{ 
-    uptr<MRT::Buffer> head   = make_uptr( MRT::Buffer , "YH" );
+{
+    if ( message == nullptr )
+        return;
+
+    uptr<MRT::Buffer> body   = MessageHub::Build( message.get() );
+    uptr<MRT::Buffer> buf    = make_uptr( MRT::Buffer , body->Size() + 6 );
+
+    char * pbuf = buf->Data();
+    *pbuf = 'Y'; pbuf++;
+    *pbuf = 'H'; pbuf++;
+
+    *( ( int* ) pbuf ) = ( int ) body->Size();
+    pbuf+=4;
+    memcpy( pbuf , body->Data() , body->Size() );
+
+    this->Send( move_ptr( buf ) );
+    /*uptr<MRT::Buffer> head   = make_uptr( MRT::Buffer , "YH" );
     uptr<MRT::Buffer> length = make_uptr( MRT::Buffer , 4 );
     uptr<MRT::Buffer> body   = MessageHub::Build( message.get( ) );
 
     *( ( int* ) length->Data( ) ) = ( int ) body->Size( );
-    
+
     this->Send( move_ptr( head ) );
     this->Send( move_ptr( length ) );
-    this->Send( move_ptr( body ) );
+    this->Send( move_ptr( body ) );*/
 }
- 
+
 void MelotonSession::OnRead( uptr<Buffer> data )
 {
     this->circle_buffer_.Push( move_ptr( data ) );
     this->dispatch_message( this->circle_buffer_ );
-} 
+}
 
 void MelotonSession::dispatch_message( MRT::CircleBuffer & buffer )
 {
@@ -67,15 +84,26 @@ void MelotonSession::dispatch_message( MRT::CircleBuffer & buffer )
         {
             case MelotonSessionParseState::kHead:
                 {
-                    auto buf = buffer.Pop( 2 );
+                    auto buf = buffer.Pop( 1 );
 
                     if ( buf == nullptr )return;
 
-                    if ( buf->Data( )[0] == 'Y' &&
-                         buf->Data( )[1] == 'H' )
+                    if ( buf->Data()[0] != 'Y' )
                     {
-                        this->parse_state_ = MelotonSessionParseState::kLength;
+                        break;
                     }
+
+                    buf = buffer.Pop( 1 );
+
+                    if ( buf == nullptr )return;
+
+                    if ( buf->Data()[0] != 'H' )
+                    {
+                        break;
+                    }
+
+                    this->parse_state_ = MelotonSessionParseState::kLength;
+
                 }break;
             case MelotonSessionParseState::kLength:
                 {
@@ -83,7 +111,7 @@ void MelotonSession::dispatch_message( MRT::CircleBuffer & buffer )
 
                     if ( buf == nullptr )return;
 
-                    int len = *( ( int * ) buf->Data( ) );
+                    int len = *( ( int * ) buf->Data() );
 
                     if ( len > MAX_CIRCLE_BUFFER_SIZE )
                     {
@@ -100,13 +128,13 @@ void MelotonSession::dispatch_message( MRT::CircleBuffer & buffer )
 
                     if ( buf == nullptr )return;
 
-                    auto result = MessageHub::Handle( this , 
-                                                      buf->Data( ) , 
-                                                      buf->Size( ) );
+                    auto result = MessageHub::Handle( this ,
+                                                      buf->Data() ,
+                                                      buf->Size() );
 
                     if ( result < 0 )
                     {
-                        this->Close( );
+                        this->Close();
                         return;
                     }
 
